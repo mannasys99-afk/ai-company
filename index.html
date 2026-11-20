@@ -83,6 +83,16 @@
     box-shadow:0 0 0 1px rgba(245,185,66,.05) inset, 0 18px 44px rgba(0,0,0,.35);
   }
   .brief-head{display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap}
+  .brief-tools{display:flex; align-items:center; justify-content:flex-end; gap:8px; margin-left:auto; flex-wrap:wrap}
+  .brief-mini{display:none; font-size:12px; font-weight:800; font-variant-numeric:tabular-nums; color:#cfd8ea; background:rgba(2,6,16,.55); border:1px solid var(--line); border-radius:999px; padding:3px 10px; white-space:nowrap}
+  .brief-toggle{display:inline-flex; align-items:center; gap:5px; font-family:inherit; font-size:11.5px; font-weight:800; color:#fcd34d; background:rgba(245,185,66,.10); border:1px solid rgba(245,185,66,.38); border-radius:999px; padding:5px 11px; cursor:pointer; transition:all .14s ease; white-space:nowrap}
+  .brief-toggle:hover{background:rgba(245,185,66,.2); color:#fde68a}
+  .brief-toggle:focus-visible{outline:2px solid #7dd3fc; outline-offset:2px}
+  .brief-toggle .arw{font-size:9px; line-height:1}
+  .brief-body[hidden]{display:none}
+  .brief.collapsed{border-color:rgba(245,185,66,.28); box-shadow:0 0 0 1px rgba(245,185,66,.04) inset, 0 10px 26px rgba(0,0,0,.28)}
+  .brief.collapsed .brief-sub{display:none}
+  .brief.collapsed .brief-mini{display:inline-flex}
   .brief-title{display:flex; align-items:center; gap:10px; font-size:16.5px; font-weight:800; letter-spacing:-.2px}
   .brief-title .ic{font-size:19px}
   .brief-sub{font-size:11.5px; color:var(--muted); font-weight:500; margin-top:1px}
@@ -409,15 +419,20 @@
 <div class="wrap">
 
   <!-- 비서 총괄 보고 -->
-  <section class="brief" aria-label="비서 총괄 보고">
+  <section class="brief" id="briefPanel" aria-label="비서 총괄 보고">
     <div class="brief-head">
       <div>
         <div class="brief-title"><span class="ic">💼</span> 비서 총괄 보고 <span class="pill">4F 전담 비서</span></div>
         <div class="brief-sub">3F 경품·이벤트팀 · 2F 다자녀 혜택팀 · 4F 히브리어 블로그 보고 통합 — 대표님 최종 승인만 남았습니다</div>
       </div>
-      <div class="redbadge" id="redBadge">🔴 0</div>
+      <div class="brief-tools">
+        <span class="brief-mini" id="briefMini">🔵 0 · 🔴 0</span>
+        <div class="redbadge" id="redBadge">🔴 0</div>
+        <button type="button" class="brief-toggle" id="briefToggle" data-brief-toggle aria-expanded="true" aria-controls="briefBody">접기 <span class="arw" aria-hidden="true">▲</span></button>
+      </div>
     </div>
 
+    <div class="brief-body" id="briefBody">
     <div class="brief-line">
       <span>🔵 승인·확인 <b id="blueLine">0</b>건</span>
       <span class="sep">·</span>
@@ -444,6 +459,7 @@
     </div>
 
     <div class="ap-list" id="apList" aria-live="polite"></div>
+    </div>
   </section>
 
   <nav class="tabs" role="tablist" aria-label="화면 선택">
@@ -943,6 +959,7 @@
   var approvals = [];
   var decisions = { ok: 0, no: 0 };
   var log = [];
+  var briefCollapsed = false;
 
   /* ---------------- 상태 저장 (localStorage) ----------------
      앱으로 설치해 다시 열어도 대표님 결재 · 직원 근무/휴식 · 활동 로그가 그대로 남습니다.
@@ -968,6 +985,7 @@
         v: 1,
         savedAt: new Date().toISOString(),
         decisions: { ok: decisions.ok, no: decisions.no },
+        brief: { collapsed: !!briefCollapsed },
         staff: staff.map(function (s) { return { id: s.id, working: !!s.working }; }),
         approvals: approvals.map(function (a) { return { id: a.id, status: a.status }; }),
         log: log.slice(0, 40)
@@ -994,6 +1012,7 @@
         if (isFinite(data.decisions.ok) && data.decisions.ok >= 0) decisions.ok = Math.floor(data.decisions.ok);
         if (isFinite(data.decisions.no) && data.decisions.no >= 0) decisions.no = Math.floor(data.decisions.no);
       }
+      if (data.brief && typeof data.brief.collapsed === "boolean") briefCollapsed = data.brief.collapsed;
       if (data.staff instanceof Array) {
         var staffMap = {};
         data.staff.forEach(function (x) { if (x && typeof x.id === "string") staffMap[x.id] = x; });
@@ -1029,6 +1048,7 @@
     approvals = clone(SEED_APPROVALS).map(function (a) { a.status = "pending"; return a; });
     decisions = { ok: 0, no: 0 };
     log = [];
+    briefCollapsed = false;
     SEED_LOG.forEach(function (e, i) {
       log.push({ time: offsetLabel(-3 + i), tag: e.tag, cls: e.cls, text: e.text });
     });
@@ -1057,6 +1077,29 @@
     log.unshift({ time: nowLabel(), tag: tag, cls: cls, text: text });
     if (log.length > 40) log.pop();
     renderLog();
+  }
+
+  /* ---------------- 비서 총괄 보고 접기/펼치기 ---------------- */
+  var briefPanel = $("#briefPanel");
+  var briefBody = $("#briefBody");
+  var briefToggle = $("#briefToggle");
+
+  function applyBriefState() {
+    if (!briefPanel || !briefBody || !briefToggle) return;
+    briefPanel.classList.toggle("collapsed", briefCollapsed);
+    briefBody.hidden = briefCollapsed;
+    briefToggle.setAttribute("aria-expanded", String(!briefCollapsed));
+    briefToggle.innerHTML = (briefCollapsed ? "펼치기" : "접기") +
+      ' <span class="arw" aria-hidden="true">' + (briefCollapsed ? "▼" : "▲") + '</span>';
+  }
+
+  function setBriefCollapsed(next) {
+    briefCollapsed = !!next;
+    applyBriefState();
+    saveState();
+    toast(briefCollapsed
+      ? "▲ 비서 총괄 보고를 접었습니다 — 건물 충이 바로 보입니다."
+      : "▼ 비서 총괄 보고를 펼쳤습니다 — 승인 항목을 확인할 수 있습니다.");
   }
 
   /* ---------------- approvals ---------------- */
@@ -1106,6 +1149,7 @@
     $("#blueCount").textContent = b;
     $("#redCount").textContent = r;
     $("#redBadge").textContent = "🔴 대기 " + r;
+    $("#briefMini").textContent = "🔵 " + b + " · 🔴 " + r;
     $("#blueState").textContent = b ? "확인 대기" : "대기 없음";
     $("#redState").textContent = r ? "승인 대기" : "대기 없음";
     $("#okTally").textContent = "✔ " + decisions.ok;
@@ -1529,6 +1573,13 @@
       return;
     }
 
+    var bt = ev.target.closest("[data-brief-toggle]");
+    if (bt) {
+      ev.stopPropagation();
+      setBriefCollapsed(!briefCollapsed);
+      return;
+    }
+
     if (ev.target.closest("[data-modal-close]") || ev.target === backdropEl) {
       closeDrawer();
       return;
@@ -1588,6 +1639,7 @@
     renderBriefSummary();
     renderDecisions();
     renderLog();
+    applyBriefState();
   }
 
   initState();
