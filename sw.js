@@ -1,10 +1,11 @@
-/* 집사님의 AI 회사 — Service Worker
+/* 삼촌의 AI 회사 — Service Worker
  * 설치 시 핵심 파일을 미리 캐시하고, 요청은 캐시 우선(없으면 네트워크)으로 응답합니다.
  * 한 번 설치하면 비행기 모드·오프라인에서도 앱이 그대로 열립니다.
+ * 캐시 이름을 올리면(v1 → v2) 설치된 앱이 새 화면을 받습니다.
  */
 "use strict";
 
-var CACHE_NAME = "ai-company-v1";
+var CACHE_NAME = "ai-company-v2";
 var PRECACHE = [
   "./",
   "./index.html",

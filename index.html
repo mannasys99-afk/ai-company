@@ -13,7 +13,7 @@
 <link rel="manifest" href="./manifest.webmanifest" />
 <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png" />
 <link rel="apple-touch-icon" href="./icon-512.png" />
-<title>집사님의 AI 회사 · 실시간 빌딩 대시보드</title>
+<title>삼촌의 AI 회사 · 실시간 빌딩 대시보드</title>
 <style>
   :root{
     --bg:#0b1020;
@@ -153,6 +153,9 @@
   .floor-body{padding:12px}
   .grid-3{display:grid; grid-template-columns:repeat(auto-fit, minmax(228px, 1fr)); gap:10px}
   .suite{display:grid; grid-template-columns:1.35fr 1fr; gap:10px}
+  .suite.suite4{grid-template-columns:1.12fr 1fr 1fr}
+  .suite-slot{display:flex; min-width:0}
+  .suite-slot > .card{flex:1 1 auto; min-width:0}
 
   .card{position:relative; border:1px solid var(--line); border-radius:14px; padding:10px 11px 11px; background:linear-gradient(180deg,#101a2e,#0b1322); overflow:hidden}
   .card-top{display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:4px}
@@ -270,6 +273,8 @@
   /* owner / secretary */
   .owner{border:1px solid rgba(245,185,66,.45); background:linear-gradient(180deg, rgba(245,185,66,.13), rgba(245,185,66,.02) 60%), #101827; box-shadow:inset 0 0 50px rgba(245,185,66,.07); display:flex; flex-direction:column}
   .secretary{border:1px solid rgba(56,189,248,.4); background:linear-gradient(180deg, rgba(56,189,248,.12), rgba(56,189,248,.02) 60%), #0f1a2c; box-shadow:inset 0 0 50px rgba(56,189,248,.07); display:flex; flex-direction:column}
+  .card.writer{border:1px solid rgba(167,139,250,.42); background:linear-gradient(180deg, rgba(167,139,250,.12), rgba(167,139,250,.02) 60%), #0f1728; box-shadow:inset 0 0 50px rgba(167,139,250,.07); display:flex; flex-direction:column}
+  .card.writer:hover{border-color:rgba(196,181,253,.7); box-shadow:0 0 0 1px rgba(167,139,250,.2), 0 14px 34px rgba(0,0,0,.42), 0 0 26px rgba(167,139,250,.25)}
   .sec-stats{display:flex; flex-direction:column; gap:4px; margin-top:auto; padding-top:8px}
   .sec-row{display:flex; justify-content:space-between; gap:8px; font-size:11px; color:var(--muted); border-top:1px dashed rgba(148,163,184,.16); padding-top:4px}
   .sec-row:first-child{border-top:0; padding-top:0}
@@ -342,8 +347,14 @@
     .lobby{grid-template-columns:1fr}
     .brief-grid{grid-template-columns:1fr}
   }
+  @media (max-width: 1020px){
+    .suite.suite4{grid-template-columns:1fr 1fr}
+    .suite.suite4 > .card.owner{grid-column:1 / -1}
+  }
   @media (max-width: 760px){
     .suite{grid-template-columns:1fr}
+    .suite.suite4{grid-template-columns:1fr}
+    .suite.suite4 > .card.owner{grid-column:auto}
   }
   @media (max-width: 640px){
     .wrap{padding:0 11px 60px}
@@ -384,8 +395,8 @@
     <div class="brand">
       <div class="logo" aria-hidden="true">🏢</div>
       <div>
-        <h1>집사님의 AI 회사</h1>
-        <p class="sub">Jibsa AI Company · 24시간 운영 · 보고 → 승인</p>
+        <h1>삼촌의 AI 회사</h1>
+        <p class="sub">Samchon AI Company · 24시간 운영 · 보고 → 승인</p>
       </div>
     </div>
     <div class="clockbox" aria-live="off">
@@ -402,7 +413,7 @@
     <div class="brief-head">
       <div>
         <div class="brief-title"><span class="ic">💼</span> 비서 총괄 보고 <span class="pill">4F 전담 비서</span></div>
-        <div class="brief-sub">3F 경품·이벤트팀 · 2F 다자녀 혜택팀 보고 통합 — 대표님 최종 승인만 남았습니다</div>
+        <div class="brief-sub">3F 경품·이벤트팀 · 2F 다자녀 혜택팀 · 4F 히브리어 블로그 보고 통합 — 대표님 최종 승인만 남았습니다</div>
       </div>
       <div class="redbadge" id="redBadge">🔴 0</div>
     </div>
@@ -442,7 +453,7 @@
 
   <div class="hint">
     <span class="k">TIP</span>
-    <span>직원 카드를 <b>클릭</b>하면 <b>업무 진행 보고</b>가 열립니다(1F·B1에서 쉬는 직원도 동일). <b>☕ 쉬게 하기</b>를 누르면 책상이 비고 <b>1F 탕비실 · B1 복지층</b>으로 내려가며, <b>💻 복귀시키기</b>로 다시 2F·3F 책상으로 부를 수 있어요.</span>
+    <span>직원 카드를 <b>클릭</b>하면 <b>업무 진행 보고</b>가 열립니다(1F·B1에서 쉬는 직원도 동일). <b>☕ 쉬게 하기</b>를 누르면 책상이 비고 <b>1F 탕비실 · B1 복지층</b>으로 내려가며, <b>💻 복귀시키기</b>로 다시 2F·3F·4F 책상으로 부를 수 있어요.</span>
   </div>
 
   <!-- ============ 전체 빌딩 ============ -->
@@ -452,12 +463,12 @@
     <section class="floor" style="--fl:#f5b942; --fl-soft:rgba(245,185,66,.16); --fl-line:rgba(245,185,66,.35)">
       <div class="floor-head">
         <span class="floor-num">4F</span>
-        <span class="floor-name"><span class="em">👑</span> 대표실 · 오너 + 전담 비서</span>
+        <span class="floor-name"><span class="em">👑</span> 대표실 · 오너 + 전담 비서 + 히브리어 블로그</span>
         <span class="floor-meta"><span class="stat" id="f4stat">보고 대기</span></span>
       </div>
       <div class="floor-body">
-        <div class="suite">
-          <article class="card owner" data-report="owner" role="button" tabindex="0" aria-label="집사님(대표) 업무 진행 보고 열기">
+        <div class="suite suite4">
+          <article class="card owner" data-report="owner" role="button" tabindex="0" aria-label="삼촌(대표) 업무 진행 보고 열기">
             <div class="card-top">
               <span class="chip work"><span class="dot"></span>대표 · 상시 대기</span>
               <span class="chip rest" id="ownerPending">📌 미결 0건</span>
@@ -466,7 +477,7 @@
               <div class="bubble">전체 보고 받는 중!</div>
               <div class="person">
                 <div class="ava xl on" aria-hidden="true">👑</div>
-                <div class="tag gold">👑 집사님 · 대표</div>
+                <div class="tag gold">👑 삼촌 · 대표</div>
               </div>
               <div class="desk">
                 <div class="laptop lit"><span class="scr"></span><span class="base"></span></div>
@@ -474,7 +485,7 @@
               </div>
             </div>
             <div class="role"><span class="rl">최종 승인 권한 · 빨간불 건은 대표님 결재 없이는 실행되지 않습니다</span><span class="peek" aria-hidden="true">보고 ›</span></div>
-            <div class="led"><span class="led-tag">▮ WORK</span><div class="led-track"><span class="led-static">최종 승인 대기 · 보고 라인 : 2F·3F 팀 → 💼 비서 → 👑 집사님(대표) · 모든 실행은 승인 후</span></div></div>
+            <div class="led"><span class="led-tag">▮ WORK</span><div class="led-track"><span class="led-static">최종 승인 대기 · 보고 라인 : 2F·3F·4F 팀 → 💼 비서 → 👑 삼촌(대표) · 모든 실행은 승인 후</span></div></div>
           </article>
 
           <article class="card secretary" data-report="secretary" role="button" tabindex="0" aria-label="비서 업무 진행 보고 열기">
@@ -501,8 +512,10 @@
               <div class="sec-row"><span>미결 승인</span><b><span class="num" id="secPending">0</span> 건</b></div>
             </div>
           </article>
+
+          <div class="suite-slot" id="desks4f"></div>
         </div>
-        <div class="rule"><span class="em">🪪</span><span><b>보고 라인</b> — 2F·3F 팀 → 💼 비서 → 👑 집사님(대표) 최종 승인. 개인정보 과다 요구 건은 비서가 먼저 걸러 올립니다.</span></div>
+        <div class="rule"><span class="em">🪪</span><span><b>보고 라인</b> — 2F·3F·4F 팀 → 💼 비서 → 👑 삼촌(대표) 최종 승인. 개인정보 과다 요구 건은 비서가 먼저 걸러 올립니다.</span></div>
       </div>
     </section>
 
@@ -548,7 +561,7 @@
               <span class="prop"><span class="e">🛎️</span> 안내데스크</span>
               <span class="prop"><span class="e">🌿</span> 화분</span>
               <span class="prop"><span class="e">📦</span> 택배함</span>
-              <span class="prop"><span class="e">🖼️</span> 집사님의 AI 회사 현판</span>
+              <span class="prop"><span class="e">🖼️</span> 삼촌의 AI 회사 현판</span>
             </div>
             <div class="empty">로비는 조용합니다 — 방문 일정이 없으면 직원들은 탕비실로 갑니다.</div>
           </div>
@@ -622,7 +635,7 @@
           <li><b>3F 경품·이벤트팀</b> — 개인정보 과다 요구(주민번호·계좌·가족정보 등)는 응모하지 않습니다. 허용 범위는 <b>이름·전화번호 수준</b>.</li>
           <li><b>3F 대형 경품</b> — 항공권·자동차 등은 <b>대표님 승인 후</b> 진행합니다.</li>
           <li><b>2F 다자녀 혜택팀</b> — 대한민국 <b>3자녀 이상</b> 혜택을 조사·보고하고, 신청 가능 건은 <b>승인 후</b> 신청합니다.</li>
-          <li><b>4F 대표실</b> — 모든 보고는 💼 비서를 거쳐 👑 집사님께 올라가고, 최종 승인은 대표님만 합니다.</li>
+          <li><b>4F 대표실</b> — 모든 보고는 💼 비서를 거쳐 👑 삼촌께 올라가고, 최종 승인은 대표님만 합니다. 히브리어 블로그 팀도 같은 라인을 따릅니다.</li>
           <li><b>복지</b> — 근무 중이 아닌 직원은 1F 탕비실과 B1 휴게실·오락실·노래방을 자유롭게 이용합니다.</li>
         </ul>
       </div>
@@ -630,8 +643,8 @@
   </main>
 
   <footer>
-    집사님의 AI 회사 · 실시간 빌딩 대시보드<br />
-    보고 라인 : 2F·3F 팀 → 💼 비서 → 👑 집사님(대표) · 승인 없이는 실행되지 않습니다
+    삼촌의 AI 회사 · 실시간 빌딩 대시보드<br />
+    보고 라인 : 2F·3F·4F 팀 → 💼 비서 → 👑 삼촌(대표) · 승인 없이는 실행되지 않습니다
   </footer>
 </div>
 
@@ -692,6 +705,13 @@
     "b1-arcade": "B1 오락실",
     "b1-karaoke": "B1 노래방"
   };
+
+  var FLOOR_INFO = {
+    "4f": { num: "4F", name: "대표실" },
+    "3f": { num: "3F", name: "경품·이벤트 응모팀" },
+    "2f": { num: "2F", name: "다자녀 혜택팀" }
+  };
+  var DEFAULT_FLOOR = { num: "3F", name: "경품·이벤트 응모팀" };
 
   var SEED_STAFF = [
     {
@@ -849,6 +869,33 @@
       comment: "세 건 모두 본인인증이 필요해 제가 대신 제출할 수는 없습니다. 승인해 주시면 순서대로 안내드릴게요.",
       next: "승인 후 하이패스 등록 → K-패스 다자녀 정보 → KTX 가족 등록 순서로 진행",
       rest: { spot: "1f-pantry", bubble: "간식바 털어가는 중~" }
+    },
+    {
+      id: "hebrew", name: "히브리어 작가", emoji: "✍️", team: "4f", role: "4F 직속 · 티스토리 성경 히브리어 블로그 · 애드센스 운영",
+      working: true,
+      work: "✍️ 초안 5편 작성 완료 · 티스토리 개설·계정 연결 진행 중",
+      workBubble: "히브리어 블로그 쓰는 중!",
+      task: "✍️ 성경 히브리어 블로그 — 초안 5편 완료 → 티스토리 등록·발행 준비",
+      progress: 62,
+      report: {
+        done: [
+          "✅ 초안 5편 작성 완료 — ① 알파벳 입문 ② 니쿠드 ③ 핵심 단어 5선 ④ 창세기 1:1 ⑤ 무료 독학 사이트",
+          "✅ 편당 약 2,400~2,850자 · 카테고리 4종 정리(히브리어 기초 · 원어 단어장 · 구약 본문 읽기 · 학습 도구)",
+          "✅ 블로그 이름 후보 5개 · 카테고리 구조 · 발행 순서 · 애드센스 사전 점검 체크리스트 정리"
+        ],
+        doing: [
+          "🔄 티스토리 블로그 개설·계정 연결 진행 중 — 블로그 주소·이름 확정 대기",
+          "🔄 5편 등록용 본문 정리 중 — 파일 맨 위 메타 블록 제외, 제목·카테고리·태그 순서 확인"
+        ],
+        wait: [
+          "⏳ 초안 5편 티스토리 등록·발행 — 대표님(삼촌) 최종 검토·승인 대기",
+          "⏳ 애드센스 신청은 발행 후 — 승인 전 점검 항목(개인정보처리방침·문의·카테고리) 확인 필요"
+        ]
+      },
+      comment: "5편 모두 로컬 초안 상태로만 있고 아직 어디에도 올리지 않았습니다. 발행은 삼촌 확인 후에 진행합니다.",
+      next: "승인 후 ①→⑤ 순서로 티스토리 등록·발행 → 애드센스 신청 순서로 진행",
+      rest: { spot: "1f-pantry", bubble: "쉬면서 다음 글 구상 중~" },
+      restSpots: ["1f-pantry", "b1-lounge", "b1-arcade"]
     }
   ];
 
@@ -877,11 +924,17 @@
       id: "a5", level: "blue", floor: "2F", title: "📋 지자체 다자녀 혜택 조사 보고",
       detail: "12개 지자체 비교 · 신청 가능 4건 정리 · 서류 목록 첨부",
       note: ""
+    },
+    {
+      id: "a6", level: "blue", floor: "4F", title: "✍️ 성경 히브리어 블로그 초안 5편 티스토리 등록·발행 검토",
+      detail: "초안 5편(알파벳 입문·니쿠드·핵심 단어 5선·창세기 1:1·무료 독학 사이트) · 편당 2,400~2,850자 · 카테고리·태그 정리됨",
+      note: "발행은 외부 공개 — 대표님 검토 후 승인된 편만 등록"
     }
   ];
 
   var SEED_LOG = [
-    { tag: "비서", cls: "b", text: "2F·3F 현황 취합 완료 — 근무 4명 / 휴식 2명. 대기 승인 5건 정리해 두었습니다." },
+    { tag: "4F", cls: "p", text: "히브리어 작가 — 초안 5편 작성 완료(알파벳·니쿠드·단어 5선·창세기 1:1·무료 사이트). 티스토리 개설·등록 진행 중, 발행은 대표님 검토 후." },
+    { tag: "비서", cls: "b", text: "2F·3F·4F 현황 취합 완료 — 근무 5명 / 휴식 2명. 대기 승인 6건 정리해 두었습니다." },
     { tag: "3F", cls: "", text: "경품팀 — 항공권·자동차 대형 경품 2건은 대표님 승인 대기 중입니다. 개인정보 과다 요구 5건은 제외했습니다." },
     { tag: "2F", cls: "p", text: "다자녀팀 — 3자녀 기준 혜택 4건 신청 가능 확인. 전기요금 감면은 승인 후 신청하겠습니다." }
   ];
@@ -1089,7 +1142,7 @@
 
   function staffCard(s) {
     var on = s.working;
-    return '<article class="card desk-card" data-card="' + s.id + '" data-report="' + s.id + '" role="button" tabindex="0" aria-label="' + esc(s.name) + ' 업무 진행 보고 열기">' +
+    return '<article class="card desk-card' + (s.team === "4f" ? " writer" : "") + '" data-card="' + s.id + '" data-report="' + s.id + '" role="button" tabindex="0" aria-label="' + esc(s.name) + ' 업무 진행 보고 열기">' +
       '<div class="card-top">' +
         '<span class="chip ' + (on ? "work" : "rest") + '"><span class="dot"></span>' + (on ? "근무 중" : "휴식 중") + '</span>' +
         '<button type="button" class="btn-toggle ' + (on ? "work" : "rest") + '" data-toggle="' + s.id + '" aria-label="' + esc(s.name + (on ? " 쉬게 하기" : " 복귀시키기")) + '">' + (on ? "☕ 쉬게 하기" : "💻 복귀시키기") + '</button>' +
@@ -1126,6 +1179,8 @@
   }
 
   function renderDesks() {
+    var d4 = $("#desks4f");
+    if (d4) d4.innerHTML = teamOf("4f").map(staffCard).join("");
     $("#desks3f").innerHTML = teamOf("3f").map(staffCard).join("");
     $("#desks2f").innerHTML = teamOf("2f").map(staffCard).join("");
   }
@@ -1173,6 +1228,9 @@
     var s = staff.filter(function (x) { return x.id === id; })[0];
     if (!s) return;
     s.working = !s.working;
+    if (!s.working && s.restSpots && s.restSpots.length) {
+      s.rest.spot = s.restSpots[Math.floor(Math.random() * s.restSpots.length)];
+    }
     renderDesks();
     renderRestAreas();
     renderFloorStats();
@@ -1185,12 +1243,13 @@
       }
     }
 
-    var place = s.team === "3f" ? "3F 경품·이벤트팀" : "2F 다자녀 혜택팀";
+    var fi = FLOOR_INFO[s.team] || DEFAULT_FLOOR;
+    var place = fi.num + " " + fi.name;
     if (s.working) {
-      addLog(s.team === "3f" ? "3F" : "2F", s.team === "3f" ? "" : "p", "💻 " + s.name + " 복귀 — " + place + " 책상으로 이동, 근무 시작");
+      addLog(fi.num, s.team === "3f" ? "" : "p", "💻 " + s.name + " 복귀 — " + place + " 책상으로 이동, 근무 시작");
       toast("💻 " + s.name + " 복귀 완료 — " + place + " 책상에서 근무를 시작합니다.");
     } else {
-      addLog(s.team === "3f" ? "3F" : "2F", s.team === "3f" ? "" : "p", "☕ " + s.name + " 휴식 — " + SPOTS[s.rest.spot] + "로 이동 (" + s.rest.bubble + ")");
+      addLog(fi.num, s.team === "3f" ? "" : "p", "☕ " + s.name + " 휴식 — " + SPOTS[s.rest.spot] + "로 이동 (" + s.rest.bubble + ")");
       toast("☕ " + s.name + " 휴식 — " + SPOTS[s.rest.spot] + "에서 충전합니다. (" + s.rest.bubble + ")");
     }
     saveState();
@@ -1206,10 +1265,11 @@
   function workCount(list) { return list.filter(function (s) { return s.working; }).length; }
 
   function staffModel(s) {
+    var fi = FLOOR_INFO[s.team] || DEFAULT_FLOOR;
     return {
       name: s.name, emoji: s.emoji, role: s.role,
-      floorNum: s.team === "3f" ? "3F" : "2F",
-      floorName: s.team === "3f" ? "경품·이벤트 응모팀" : "다자녀 혜택팀",
+      floorNum: fi.num,
+      floorName: fi.name,
       statusKey: s.working ? "work" : "rest",
       statusLabel: s.working ? "근무 중" : "휴식 중 · " + SPOTS[s.rest.spot],
       paused: !s.working,
@@ -1240,17 +1300,18 @@
       floorNum: "4F", floorName: "대표실",
       statusKey: "work", statusLabel: "근무 중 · 브리핑 중",
       paused: false,
-      task: tot ? "💼 2F·3F 현황 취합 · 미결 승인 " + tot + "건 정리" : "💼 2F·3F 현황 취합 · 미결 승인 정리 완료",
+      task: tot ? "💼 2F·3F·4F 현황 취합 · 미결 승인 " + tot + "건 정리" : "💼 2F·3F·4F 현황 취합 · 미결 승인 정리 완료",
       progress: 100,
       meterNote: "전원 현황 취합 완료 · 미결 " + tot + "건 대표님 보고 중",
       groups: [
         { key: "done", label: "✅ 완료", items: [
           "3F 경품·이벤트팀 근무 " + workCount(t3) + "/3명 · 2F 다자녀 혜택팀 근무 " + workCount(t2) + "/3명 현황 취합",
+          "4F 히브리어 블로그 초안 5편 완료 확인 — 티스토리 등록·발행 전 대표님 검토 대기",
           "1F·B1 휴식 " + rest + "명 위치 확인 — 탕비실 " + restingAt("1f-pantry").length + " · 휴게실 " + restingAt("b1-lounge").length + " · 오락실 " + restingAt("b1-arcade").length + " · 노래방 " + restingAt("b1-karaoke").length,
           "개인정보 과다 요구 5건 사전 차단 — 주민번호·계좌·카드 요구 응모는 올리지 않음"
         ] },
         { key: "doing", label: "🔄 진행 중", items: [
-          "미결 승인 " + tot + "건 우선순위 정리 — 빨간불 " + r + "건(대형 경품·실제 신청) / 파란불 " + b + "건(일반 확인)",
+          "미결 승인 " + tot + "건 우선순위 정리 — 빨간불 " + r + "건(대형 경품·실제 신청) / 파란불 " + b + "건(일반 확인·4F 블로그 발행 검토)",
           "오늘 18:00 마감 항공권 건 — 대표님 결재 후 즉시 3F로 실행 지시 예정"
         ] },
         { key: "wait", label: "⏳ 승인·확인 대기", items: [
@@ -1261,7 +1322,7 @@
       comment: tot
         ? "빨간불 " + r + "건이 오늘 18:00 마감입니다. 먼저 결재해 주시면 나머지는 확인만 하면 됩니다."
         : "미결 건이 없습니다. 오늘 결재분은 팀에 전부 전달했습니다.",
-      next: tot ? "결재 결과를 3F·2F 팀에 즉시 전달 → 실행 착수" : "새 보고가 들어오면 정리해서 다시 올립니다"
+      next: tot ? "결재 결과를 3F·2F·4F 팀에 즉시 전달 → 실행 착수" : "새 보고가 들어오면 정리해서 다시 올립니다"
     };
   }
 
@@ -1273,7 +1334,7 @@
     var all = tot + done;
     var pct = all ? Math.round((done / all) * 100) : 100;
     return {
-      name: "집사님", emoji: "👑",
+      name: "삼촌", emoji: "👑",
       role: "대표 · 최종 승인 권한",
       floorNum: "4F", floorName: "대표실",
       statusKey: "work", statusLabel: "근무 중 · 상시 대기",
@@ -1401,8 +1462,9 @@
 
     var rows = [
       ["🕐 기준 시각", nowLabel() + " KST"],
-      ["👑 4F 대표실", "집사님 보고 받는 중 · 미결 " + (b + r) + "건"],
-      ["💼 4F 전담 비서", "3F·2F 현황 브리핑 중"],
+      ["👑 4F 대표실", "삼촌 보고 받는 중 · 미결 " + (b + r) + "건"],
+      ["💼 4F 전담 비서", "3F·2F 현황 + 4F 블로그 진행 브리핑 중"],
+      ["✍️ 4F 히브리어 블로그", "초안 5편 완료 · 티스토리 등록 진행 중 · 발행 승인 대기"],
       ["🎁 3F 경품·이벤트팀", "근무 " + work3 + " / 3명 · 대형 경품 승인 대기 " + r + "건"],
       ["🍼 2F 다자녀 혜택팀", "근무 " + work2 + " / 3명 · 신청 가능 4건"],
       ["☕ 1F 탕비실", restingAt("1f-pantry").length + "명 휴식 중"],
