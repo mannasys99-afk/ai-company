@@ -5,7 +5,7 @@
  */
 "use strict";
 
-var CACHE_NAME = "ai-company-v3";
+var CACHE_NAME = "ai-company-v4";
 var PRECACHE = [
   "./",
   "./index.html",
