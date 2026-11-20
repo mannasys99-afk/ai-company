@@ -203,6 +203,25 @@
   .laptop .base{position:absolute; left:0; bottom:0; width:52px; height:6px; border-radius:2px; background:linear-gradient(180deg,#475569,#1e293b)}
   .plank{width:88px; height:8px; margin-top:2px; border-radius:2px; background:linear-gradient(180deg,#5b3a26,#33200f); box-shadow:0 7px 14px rgba(0,0,0,.45)}
   .vacant{margin-top:3px; font-size:9.5px; font-weight:800; color:#94a3b8; background:rgba(2,6,16,.8); border:1px dashed rgba(148,163,184,.4); padding:1px 5px; border-radius:5px; white-space:nowrap}
+  /* 자리 비움 — 근무 중이 아닐 때는 캐릭터 대신 빈 의자만 남깁니다 */
+  .ava.empty{background:rgba(148,163,184,.06); border:2px dashed rgba(148,163,184,.38); font-size:25px; box-shadow:none; filter:none; opacity:1}
+  .tag.dim{color:#9fb0c9; background:rgba(2,6,16,.7); border-style:dashed}
+  .desk.off .laptop .scr{background:#0b1322; border-color:rgba(148,163,184,.26); box-shadow:none}
+  .desk.off .laptop .scr::after{opacity:.18}
+  .desk.off .laptop .base{opacity:.4}
+  .desk.off .plank{opacity:.55}
+  .card.desk-card.resting .scene{padding-top:30px}
+  .vacant-note{margin-top:4px; font-family:inherit; font-size:9.5px; font-weight:800; color:#a9bcd6; background:rgba(2,6,16,.75); border:1px dashed rgba(148,163,184,.42); padding:2px 7px; border-radius:6px; cursor:pointer; white-space:nowrap; transition:all .14s ease}
+  .vacant-note:hover{color:#e6f6ff; border-color:rgba(125,211,252,.6); background:rgba(56,189,248,.12)}
+  .vacant-note:focus-visible{outline:2px solid #7dd3fc; outline-offset:2px}
+  .room-flash{animation:roomflash .9s ease}
+  @keyframes roomflash{0%{box-shadow:0 0 0 0 rgba(245,185,66,.55)}100%{box-shadow:0 0 0 14px rgba(245,185,66,0)}}
+
+  /* ---------- 휴식 운영 바 ---------- */
+  .staff-bar{display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin-top:10px; padding:8px 11px; border-radius:12px; border:1px solid var(--line); background:rgba(6,12,26,.5)}
+  .staff-bar .lb{font-size:11.5px; font-weight:800; color:#cbd5e1}
+  .staff-bar .sp{margin-left:auto; font-size:10.5px; color:var(--dim); font-weight:700; font-variant-numeric:tabular-nums}
+  .btn-toggle.bulk{padding:6px 11px; font-size:11.5px}
   .role{font-size:11px; color:var(--muted); margin:2px 0 8px; min-height:15px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
 
   .led{display:flex; align-items:center; gap:8px; padding:6px 8px; border-radius:9px; border:1px solid rgba(34,197,94,.22); background:linear-gradient(180deg, rgba(6,30,18,.95), rgba(4,20,12,.95)); overflow:hidden}
@@ -556,7 +575,13 @@
 
   <div class="hint">
     <span class="k">TIP</span>
-    <span>직원 카드를 <b>클릭</b>하면 <b>업무 진행 보고</b>가 열립니다(1F·B1에서 쉬는 직원도 동일). <b>☕ 쉬게 하기</b>를 누르면 책상이 비고 <b>1F 탕비실 · B1 복지층</b>으로 내려가며, <b>💻 복귀시키기</b>로 다시 2F·3F·4F 책상으로 부를 수 있어요. <b>✍️ 히브리어 작가</b> 카드에서는 초안 5편을 모달 안에서 바로 읽고 복사할 수 있습니다.</span>
+    <span>직원 카드를 <b>클릭</b>하면 <b>업무 진행 보고</b>가 열립니다(1F·B1에서 쉬는 직원도 동일). <b>☕ 쉬게 하기</b>를 누르면 책상은 <b>빈 의자</b>로 남고 캐릭터는 <b>1F 탕비실 · B1 휴게실·오락실·노래방</b>으로 내려가 <b>12~15초마다 자유롭게 옮겨 다닙니다</b>. <b>💻 복귀시키기</b>로 다시 책상으로 부를 수 있어요. <b>✍️ 히브리어 작가</b> 카드에서는 초안 5편을 모달 안에서 바로 읽고 복사할 수 있습니다.</span>
+  </div>
+
+  <div class="staff-bar">
+    <span class="lb">🛋️ 휴식 운영</span>
+    <button type="button" class="btn-toggle rest bulk" id="bulkBtn" data-bulk="rest" aria-label="일 없는 직원 모두 쉬게 하기">🌙 일 없는 직원 쉬게 하기</button>
+    <span class="sp" id="bulkNote">근무 0명 · 휴식 0명</span>
   </div>
 
   <!-- ============ 전체 빌딩 ============ -->
@@ -668,7 +693,7 @@
             </div>
             <div class="empty">로비는 조용합니다 — 방문 일정이 없으면 직원들은 탕비실로 갑니다.</div>
           </div>
-          <div class="room">
+          <div class="room" id="room-1f-pantry">
             <div class="room-head">☕ 탕비실<span class="cnt" id="pantryCnt">0명</span></div>
             <div class="room-desc">쉬는 직원들이 자유롭게 커피와 간식을 즐기는 곳</div>
             <div class="props">
@@ -680,7 +705,7 @@
             <div class="guests" id="pantryGuests"></div>
           </div>
         </div>
-        <div class="rule"><span class="em">📌</span><span><b>이용 규칙</b> — 근무 중이 아닌 직원은 1F 탕비실을 자유롭게 이용합니다. 돌아갈 때는 카드의 <b>💻 복귀시키기</b>를 누르면 됩니다.</span></div>
+        <div class="rule"><span class="em">📌</span><span><b>이용 규칙</b> — 근무 중이 아닌 직원은 1F 탕비실을 자유롭게 이용합니다. 12~15초마다 B1 복지층과 서로 자리를 옮겨 다니고, 돌아갈 때는 카드의 <b>💻 복귀시키기</b>를 누르면 됩니다.</span></div>
       </div>
     </section>
 
@@ -693,23 +718,23 @@
       </div>
       <div class="floor-body">
         <div class="b1">
-          <div class="room zone">
+          <div class="room zone" id="room-b1-lounge">
             <div class="room-head">🛋️ 휴게실<span class="cnt" id="loungeCnt">0명</span></div>
             <div class="room-desc">소파 · 빈백 · 눈 감고 충전</div>
             <div class="guests" id="loungeGuests"></div>
           </div>
-          <div class="room zone">
+          <div class="room zone" id="room-b1-arcade">
             <div class="room-head">🕹️ 오락실<span class="cnt" id="arcadeCnt">0명</span></div>
             <div class="room-desc">오락기 3대 · 인형뽑기 · 에어하키</div>
             <div class="guests" id="arcadeGuests"></div>
           </div>
-          <div class="room zone">
+          <div class="room zone" id="room-b1-karaoke">
             <div class="room-head">🎤 노래방<span class="cnt" id="karaokeCnt">0명</span></div>
             <div class="room-desc">최신곡 8,000곡 · 98점 도전</div>
             <div class="guests" id="karaokeGuests"></div>
           </div>
         </div>
-        <div class="rule"><span class="em">📌</span><span><b>복지층 규칙</b> — 24시간 개방. 쉬는 직원은 마음껏 놀고 충전한 뒤 스스로 복귀합니다. (대표님이 부르면 즉시 복귀)</span></div>
+        <div class="rule"><span class="em">📌</span><span><b>복지층 규칙</b> — 24시간 개방. 쉬는 직원은 탕비실·휴게실·오락실·노래방을 12~15초마다 자유롭게 옮겨 다니며 충전하고, 책상 카드의 <b>💻 복귀시키기</b>로 언제든 부를 수 있습니다.</span></div>
       </div>
     </section>
 
@@ -739,7 +764,7 @@
           <li><b>3F 대형 경품</b> — 항공권·자동차 등은 <b>대표님 승인 후</b> 진행합니다.</li>
           <li><b>2F 다자녀 혜택팀</b> — 대한민국 <b>3자녀 이상</b> 혜택을 조사·보고하고, 신청 가능 건은 <b>승인 후</b> 신청합니다.</li>
           <li><b>4F 대표실</b> — 모든 보고는 💼 비서를 거쳐 👑 삼촌께 올라가고, 최종 승인은 대표님만 합니다. 히브리어 블로그 팀도 같은 라인을 따릅니다.</li>
-          <li><b>복지</b> — 근무 중이 아닌 직원은 1F 탕비실과 B1 휴게실·오락실·노래방을 자유롭게 이용합니다.</li>
+          <li><b>복지</b> — 근무 중이 아닌 직원은 책상을 비우고 1F 탕비실과 B1 휴게실·오락실·노래방을 12~15초마다 자유롭게 옮겨 다니며 쉽니다.</li>
         </ul>
       </div>
     </section>
@@ -814,6 +839,21 @@ window.__BLOG_POSTS = [{"id":"01","no":"①","file":"01-성경-히브리어-입�
     "b1-arcade": "B1 오락실",
     "b1-karaoke": "B1 노래방"
   };
+  /* 쉬는 직원이 자유롭게 옮겨 다니는 휴식 자리 — 순서대로 돌거나 무작위로 이동합니다 */
+  var REST_SPOTS = ["1f-pantry", "b1-lounge", "b1-arcade", "b1-karaoke"];
+  var SPOT_BUBBLES = {
+    "1f-pantry": ["아메리카노 한 잔!", "간식바 털어가는 중~", "커피 한 모금 충전!", "따뜻한 차 한 잔~"],
+    "b1-lounge": ["소파에서 잠깐 쉬는 중~", "빈백에 파묻혔어요…", "10분만 눈 붙이는 중", "충전 중이에요…"],
+    "b1-arcade": ["오락실 한 판!", "인형뽑기 도전!", "에어하키 한 판!", "하이스코어 갱신 중!"],
+    "b1-karaoke": ["노래방 98점 도전!", "18번 열창 중!", "마이크 잡았다!", "앵콜 요청!"]
+  };
+  function pickBubble(spot) {
+    var list = SPOT_BUBBLES[spot] || ["쉬는 중~"];
+    return list[Math.floor(Math.random() * list.length)];
+  }
+  function spotsFor(s) {
+    return (s.restSpots && s.restSpots.length) ? s.restSpots : REST_SPOTS;
+  }
 
   var FLOOR_INFO = {
     "4f": { num: "4F", name: "대표실" },
@@ -982,19 +1022,20 @@ window.__BLOG_POSTS = [{"id":"01","no":"①","file":"01-성경-히브리어-입�
     {
       id: "hebrew", name: "히브리어 작가", emoji: "✍️", team: "4f", role: "4F 직속 · 티스토리 성경 히브리어 블로그 · 애드센스 운영",
       working: true,
-      work: "✍️ 초안 5편 작성 완료 · 티스토리 개설·계정 연결 진행 중",
+      work: "✍️ 초안 5편 작성 완료 · 티스토리 블로그 개설(hebrew-bible-note.tistory.com) · 등록 대기",
       workBubble: "히브리어 블로그 쓰는 중!",
-      task: "✍️ 성경 히브리어 블로그 — 초안 5편 완료 → 티스토리 등록·발행 준비",
+      task: "✍️ 성경 히브리어 블로그 — 초안 5편 완료 → hebrew-bible-note.tistory.com 등록·발행 준비",
       progress: 62,
       report: {
         done: [
           "✅ 초안 5편 작성 완료 — ① 알파벳 입문 ② 니쿠드 ③ 핵심 단어 5선 ④ 창세기 1:1 ⑤ 무료 독학 사이트",
           "✅ 편당 약 2,400~2,850자 · 카테고리 4종 정리(히브리어 기초 · 원어 단어장 · 구약 본문 읽기 · 학습 도구)",
           "✅ 블로그 이름 후보 5개 · 카테고리 구조 · 발행 순서 · 애드센스 사전 점검 체크리스트 정리",
-          "✅ 보고 모달에서 초안 5편 바로 읽기 · 본문 복사 지원 (티스토리 붙여넣기용)"
+          "✅ 보고 모달에서 초안 5편 바로 읽기 · 본문 복사 지원 (티스토리 붙여넣기용)",
+          "✅ 티스토리 블로그 개설 완료 — hebrew-bible-note.tistory.com (개인정보 없는 학습 블로그)"
         ],
         doing: [
-          "🔄 티스토리 블로그 개설·계정 연결 진행 중 — 블로그 주소·이름 확정 대기",
+          "🔄 발행용 글 5편 다듬는 중 — 블로그 카테고리 구조에 맞춰 제목·태그·순서 점검",
           "🔄 5편 등록용 본문 정리 중 — 파일 맨 위 메타 블록 제외, 제목·카테고리·태그 순서 확인"
         ],
         wait: [
@@ -1003,7 +1044,7 @@ window.__BLOG_POSTS = [{"id":"01","no":"①","file":"01-성경-히브리어-입�
         ]
       },
       comment: "5편 모두 로컬 초안 상태로만 있고 아직 어디에도 올리지 않았습니다. 발행은 삼촌 확인 후에 진행합니다.",
-      next: "승인 후 ①→⑤ 순서로 티스토리 등록·발행 → 애드센스 신청 순서로 진행",
+      next: "승인 후 ①→⑤ 순서로 hebrew-bible-note.tistory.com 에 등록·발행 → 애드센스 신청 순서로 진행",
       rest: { spot: "1f-pantry", bubble: "쉬면서 다음 글 구상 중~" },
       restSpots: ["1f-pantry", "b1-lounge", "b1-arcade"]
     }
@@ -1037,13 +1078,13 @@ window.__BLOG_POSTS = [{"id":"01","no":"①","file":"01-성경-히브리어-입�
     },
     {
       id: "a6", level: "blue", floor: "4F", title: "✍️ 성경 히브리어 블로그 초안 5편 티스토리 등록·발행 검토",
-      detail: "초안 5편(알파벳 입문·니쿠드·핵심 단어 5선·창세기 1:1·무료 독학 사이트) · 편당 한글 2,400~2,850자 · 카테고리·태그 정리됨 · 보고서에서 바로 읽기 가능",
+      detail: "초안 5편(알파벳 입문·니쿠드·핵심 단어 5선·창세기 1:1·무료 독학 사이트) · 편당 한글 2,400~2,850자 · 블로그 hebrew-bible-note.tistory.com 개설 완료 · 보고서에서 바로 읽기 가능",
       note: "발행은 외부 공개 — 대표님 검토 후 승인된 편만 등록"
     }
   ];
 
   var SEED_LOG = [
-    { tag: "4F", cls: "p", text: "히브리어 작가 — 초안 5편 작성 완료(알파벳·니쿠드·단어 5선·창세기 1:1·무료 사이트). 티스토리 개설·등록 진행 중, 발행은 대표님 검토 후." },
+    { tag: "4F", cls: "p", text: "히브리어 작가 — 초안 5편 작성 완료(알파벳·니쿠드·단어 5선·창세기 1:1·무료 사이트). 블로그 개설(hebrew-bible-note.tistory.com) · 등록 진행 중, 발행은 대표님 검토 후." },
     { tag: "비서", cls: "b", text: "2F·3F·4F 현황 취합 완료 — 근무 5명 / 휴식 2명. 대기 승인 6건 정리해 두었습니다." },
     { tag: "3F", cls: "", text: "경품팀 — 항공권·자동차 대형 경품 2건은 대표님 승인 대기 중입니다. 개인정보 과다 요구 5건은 제외했습니다." },
     { tag: "2F", cls: "p", text: "다자녀팀 — 3자녀 기준 혜택 4건 신청 가능 확인. 전기요금 감면은 승인 후 신청하겠습니다." }
@@ -1080,7 +1121,7 @@ window.__BLOG_POSTS = [{"id":"01","no":"①","file":"01-성경-히브리어-입�
         savedAt: new Date().toISOString(),
         decisions: { ok: decisions.ok, no: decisions.no },
         brief: { collapsed: !!briefCollapsed },
-        staff: staff.map(function (s) { return { id: s.id, working: !!s.working }; }),
+        staff: staff.map(function (s) { return { id: s.id, working: !!s.working, spot: s.rest.spot, bubble: s.rest.bubble }; }),
         approvals: approvals.map(function (a) { return { id: a.id, status: a.status }; }),
         log: log.slice(0, 40)
       }));
@@ -1113,6 +1154,10 @@ window.__BLOG_POSTS = [{"id":"01","no":"①","file":"01-성경-히브리어-입�
         staff.forEach(function (s) {
           var saved = staffMap[s.id];
           if (saved && typeof saved.working === "boolean") s.working = saved.working;
+          if (saved && typeof saved.spot === "string" && SPOTS[saved.spot]) {
+            s.rest.spot = saved.spot;
+            s.rest.bubble = (typeof saved.bubble === "string" && saved.bubble) ? saved.bubble : pickBubble(saved.spot);
+          }
         });
       }
       if (data.approvals instanceof Array) {
@@ -1280,22 +1325,28 @@ window.__BLOG_POSTS = [{"id":"01","no":"①","file":"01-성경-히브리어-입�
 
   function staffCard(s) {
     var on = s.working;
-    return '<article class="card desk-card' + (s.team === "4f" ? " writer" : "") + '" data-card="' + s.id + '" data-report="' + s.id + '" role="button" tabindex="0" aria-label="' + esc(s.name) + ' 업무 진행 보고 열기">' +
+    var place = SPOTS[s.rest.spot] || SPOTS["1f-pantry"];
+    return '<article class="card desk-card' + (s.team === "4f" ? " writer" : "") + (on ? "" : " resting") + '" data-card="' + s.id + '" data-report="' + s.id + '" role="button" tabindex="0" aria-label="' + esc(s.name + (on ? " 업무 진행 보고 열기" : " — 자리 비움 · " + place + "에서 휴식 중 · 보고 열기")) + '">' +
       '<div class="card-top">' +
-        '<span class="chip ' + (on ? "work" : "rest") + '"><span class="dot"></span>' + (on ? "근무 중" : "휴식 중") + '</span>' +
+        '<span class="chip ' + (on ? "work" : "rest") + '"><span class="dot"></span>' + (on ? "근무 중" : "자리 비움") + '</span>' +
         '<button type="button" class="btn-toggle ' + (on ? "work" : "rest") + '" data-toggle="' + s.id + '" aria-label="' + esc(s.name + (on ? " 쉬게 하기" : " 복귀시키기")) + '">' + (on ? "☕ 쉬게 하기" : "💻 복귀시키기") + '</button>' +
       '</div>' +
       '<div class="scene">' +
-        '<div class="bubble' + (on ? "" : " soft") + '">' + esc(on ? s.workBubble : SPOTS[s.rest.spot] + "에서 충전 중…") + '</div>' +
-        '<div class="person">' +
-          '<div class="ava ' + (on ? "on" : "off") + '" aria-hidden="true">' + s.emoji + '</div>' +
-          '<div class="tag">' + esc(s.name) + '</div>' +
-        '</div>' +
-        '<div class="desk">' +
+        '<div class="bubble' + (on ? "" : " soft") + '">' + esc(on ? s.workBubble : "자리 비움 · " + place + "에서 휴식 중") + '</div>' +
+        (on
+          ? '<div class="person">' +
+              '<div class="ava on" aria-hidden="true">' + s.emoji + '</div>' +
+              '<div class="tag">' + esc(s.name) + '</div>' +
+            '</div>'
+          : '<div class="person">' +
+              '<div class="ava empty" aria-hidden="true">🪑</div>' +
+              '<div class="tag dim">' + esc(s.name) + ' · 자리 비움</div>' +
+            '</div>') +
+        '<div class="desk' + (on ? "" : " off") + '">' +
           '<div class="laptop' + (on ? " lit" : "") + '"><span class="scr"></span><span class="base"></span></div>' +
           '<div class="plank"></div>' +
-          (on ? "" : '<span class="vacant">자리 비움</span>') +
         '</div>' +
+        (on ? "" : '<button type="button" class="vacant-note" data-goto="' + s.rest.spot + '" aria-label="' + esc(place) + ' 위치 보기">↘ ' + esc(place) + '에서 보기</button>') +
       '</div>' +
       '<div class="role"><span class="rl">' + esc(s.role) + '</span><span class="peek" aria-hidden="true">보고 ›</span></div>' +
       '<div class="led ' + (on ? "live" : "idle") + '">' +
@@ -1366,12 +1417,16 @@ window.__BLOG_POSTS = [{"id":"01","no":"①","file":"01-성경-히브리어-입�
     var s = staff.filter(function (x) { return x.id === id; })[0];
     if (!s) return;
     s.working = !s.working;
-    if (!s.working && s.restSpots && s.restSpots.length) {
-      s.rest.spot = s.restSpots[Math.floor(Math.random() * s.restSpots.length)];
+    if (!s.working) {
+      var spots = spotsFor(s);
+      var next = spots[Math.floor(Math.random() * spots.length)];
+      s.rest.spot = next;
+      s.rest.bubble = pickBubble(next);
     }
     renderDesks();
     renderRestAreas();
     renderFloorStats();
+    renderStaffBar();
     renderBriefSummary();
     if (openId) {
       renderDrawer();
@@ -1391,6 +1446,99 @@ window.__BLOG_POSTS = [{"id":"01","no":"①","file":"01-성경-히브리어-입�
       toast("☕ " + s.name + " 휴식 — " + SPOTS[s.rest.spot] + "에서 충전합니다. (" + s.rest.bubble + ")");
     }
     saveState();
+  }
+
+  /* ---------------- 휴식 운영 (전체 쉬게 / 전원 복귀) ---------------- */
+  function renderStaffBar() {
+    var btn = $("#bulkBtn"), note = $("#bulkNote");
+    if (!btn || !note) return;
+    var w = staff.filter(function (s) { return s.working; }).length;
+    var r = staff.length - w;
+    if (w) {
+      btn.textContent = "🌙 일 없는 직원 쉬게 하기";
+      btn.className = "btn-toggle rest bulk";
+      btn.setAttribute("data-bulk", "rest");
+      btn.setAttribute("aria-label", "근무 중인 직원 " + w + "명을 모두 쉬게 하기");
+    } else {
+      btn.textContent = "💻 전원 책상 복귀";
+      btn.className = "btn-toggle work bulk";
+      btn.setAttribute("data-bulk", "work");
+      btn.setAttribute("aria-label", "쉬고 있는 직원 " + r + "명을 모두 책상으로 복귀시키기");
+    }
+    note.textContent = "근무 " + w + "명 · 휴식 " + r + "명 · 쉬는 직원은 12~15초마다 자유 이동";
+  }
+
+  function afterBulk() {
+    renderDesks();
+    renderRestAreas();
+    renderFloorStats();
+    renderStaffBar();
+    renderBriefSummary();
+    if (openId && reading === null) renderDrawer();
+    saveState();
+  }
+
+  function bulkRest() {
+    var targets = staff.filter(function (s) { return s.working; });
+    if (!targets.length) return;
+    targets.forEach(function (s) {
+      s.working = false;
+      var next = REST_SPOTS[Math.floor(Math.random() * REST_SPOTS.length)];
+      s.rest.spot = next;
+      s.rest.bubble = pickBubble(next);
+    });
+    afterBulk();
+    addLog("비서", "b", "🌙 직원 " + targets.length + "명 휴식 — 1F 탕비실·B1 복지층에서 자유롭게 이동합니다.");
+    toast("🌙 직원 " + targets.length + "명을 쉬게 했습니다 — 책상은 비고 1F·B1에서 자유롭게 돌아다닙니다.");
+  }
+
+  function bulkReturn() {
+    var targets = staff.filter(function (s) { return !s.working; });
+    if (!targets.length) return;
+    targets.forEach(function (s) { s.working = true; });
+    afterBulk();
+    addLog("비서", "b", "💻 전원 복귀 — 직원 " + targets.length + "명이 각자 책상으로 돌아와 근무를 시작합니다.");
+    toast("💻 직원 " + targets.length + "명 전원 책상 복귀 — 2F·3F·4F 근무를 시작합니다.");
+  }
+
+  /* ---------------- 쉬는 직원 자유 이동 (12~15초마다 한 명씩) ---------------- */
+  var roamTimer = null;
+
+  function flashRoom(spot) {
+    var el = document.getElementById("room-" + spot);
+    if (!el) return;
+    el.classList.remove("room-flash");
+    void el.offsetWidth;
+    el.classList.add("room-flash");
+  }
+
+  function gotoSpot(spot) {
+    var el = document.getElementById("room-" + spot);
+    if (!el) return;
+    try { el.scrollIntoView({ behavior: "smooth", block: "center" }); } catch (e) { el.scrollIntoView(); }
+    flashRoom(spot);
+  }
+
+  function roamTick() {
+    var resting = staff.filter(function (s) { return !s.working; });
+    if (resting.length) {
+      var s = resting[Math.floor(Math.random() * resting.length)];
+      var others = REST_SPOTS.filter(function (p) { return p !== s.rest.spot; });
+      var next = others[Math.floor(Math.random() * others.length)] || REST_SPOTS[0];
+      s.rest.spot = next;
+      s.rest.bubble = pickBubble(next);
+      renderDesks();
+      renderRestAreas();
+      renderBriefSummary();
+      if (openId && reading === null) renderDrawer();
+      flashRoom(next);
+    }
+    scheduleRoam();
+  }
+
+  function scheduleRoam() {
+    clearTimeout(roamTimer);
+    roamTimer = setTimeout(roamTick, 12000 + Math.floor(Math.random() * 3000));
   }
 
   /* ---------------- 업무 진행 보고 (drawer) ---------------- */
@@ -1444,7 +1592,7 @@ window.__BLOG_POSTS = [{"id":"01","no":"①","file":"01-성경-히브리어-입�
       groups: [
         { key: "done", label: "✅ 완료", items: [
           "3F 경품·이벤트팀 근무 " + workCount(t3) + "/3명 · 2F 다자녀 혜택팀 근무 " + workCount(t2) + "/3명 현황 취합",
-          "4F 히브리어 블로그 초안 5편 완료 확인 — 티스토리 등록·발행 전 대표님 검토 대기",
+          "4F 히브리어 블로그 초안 5편 완료 확인 — hebrew-bible-note.tistory.com 등록·발행 전 대표님 검토 대기",
           "1F·B1 휴식 " + rest + "명 위치 확인 — 탕비실 " + restingAt("1f-pantry").length + " · 휴게실 " + restingAt("b1-lounge").length + " · 오락실 " + restingAt("b1-arcade").length + " · 노래방 " + restingAt("b1-karaoke").length,
           "개인정보 과다 요구 5건 사전 차단 — 주민번호·계좌·카드 요구 응모는 올리지 않음"
         ] },
@@ -1514,6 +1662,7 @@ window.__BLOG_POSTS = [{"id":"01","no":"①","file":"01-성경-히브리어-입�
      티스토리 주소는 삼촌(대표)이 넣어 두면 연결된 상태로 표시됩니다. */
   var BLOG_POSTS = (window.__BLOG_POSTS && window.__BLOG_POSTS.length) ? window.__BLOG_POSTS : [];
   var TISTORY_KEY = "aiCompany.tistory.v1";
+  var DEFAULT_TISTORY = "hebrew-bible-note.tistory.com";   /* 히브리어 작가 몫으로 개설된 블로그(개인정보 없음) */
   var reading = null;          /* 읽고 있는 글 index (null 이면 보고 화면) */
   var tistoryEditing = false;
   var tistory = loadTistory();
@@ -1530,17 +1679,17 @@ window.__BLOG_POSTS = [{"id":"01","no":"①","file":"01-성경-히브리어-입�
 
   function loadTistory() {
     try {
-      var v = window.localStorage.getItem(TISTORY_KEY);
-      var host = normalizeHost(v);
-      return host || "";
-    } catch (e) { return ""; }
+      var raw = window.localStorage.getItem(TISTORY_KEY);
+      if (raw === null) return DEFAULT_TISTORY;   /* 한 번도 설정한 적 없으면 개설된 블로그 주소를 기본값으로 */
+      var host = normalizeHost(raw);
+      return host || "";                           /* 직접 해제한 경우("")는 그대로 준수 */
+    } catch (e) { return DEFAULT_TISTORY; }
   }
 
   function saveTistory(host) {
     tistory = host || "";
     try {
-      if (tistory) window.localStorage.setItem(TISTORY_KEY, tistory);
-      else window.localStorage.removeItem(TISTORY_KEY);
+      window.localStorage.setItem(TISTORY_KEY, tistory);   /* ""로 저장해 기본값이 되살아나지 않게 */
     } catch (e) { /* 저장소를 쓸 수 없어도 화면은 그대로 동작 */ }
   }
 
@@ -1548,7 +1697,7 @@ window.__BLOG_POSTS = [{"id":"01","no":"①","file":"01-성경-히브리어-입�
     if (tistory && !tistoryEditing) {
       return '<div class="tb-status on"><span class="ic">🌐</span>' +
         '<div class="tx"><b>티스토리 블로그 연결됨</b>' + esc(tistory) + '</div>' +
-        '<a class="tb-btn" href="https://' + esc(tistory) + '/" target="_blank" rel="noopener noreferrer">블로그 열기 ↗</a>' +
+        '<a class="tb-btn" href="https://' + esc(tistory) + '/" target="_blank" rel="noopener noreferrer">🌐 티스토리 블로그 열기 ↗</a>' +
         '<button type="button" class="tb-btn ghost" data-tistory-edit>주소 변경</button></div>';
     }
     return '<div class="tb-status"><span class="ic">⏳</span>' +
@@ -1562,7 +1711,7 @@ window.__BLOG_POSTS = [{"id":"01","no":"①","file":"01-성경-히브리어-입�
         '<button type="submit" class="tb-btn">주소 저장</button>' +
         (tistory ? '<button type="button" class="tb-btn ghost" data-tistory-clear>연결 해제</button>' : '') +
       '</form>' +
-      '<div class="tb-note">주소를 넣어 두면 위 5편을 올린 뒤 바로 내 블로그로 이동할 수 있습니다. 계정 연결·발행은 삼촌(대표) 확인 후 진행합니다.</div>';
+      '<div class="tb-note">주소를 넣어 두면 위 5편을 올린 뒤 바로 내 블로그로 이동할 수 있습니다. 기본 주소는 개설된 hebrew-bible-note.tistory.com 이며, 계정 연결·발행은 삼촌(대표) 확인 후 진행합니다.</div>';
   }
 
   function blogSectionHtml() {
@@ -1806,7 +1955,7 @@ window.__BLOG_POSTS = [{"id":"01","no":"①","file":"01-성경-히브리어-입�
       ["🕐 기준 시각", nowLabel() + " KST"],
       ["👑 4F 대표실", "삼촌 보고 받는 중 · 미결 " + (b + r) + "건"],
       ["💼 4F 전담 비서", "3F·2F 현황 + 4F 블로그 진행 브리핑 중"],
-      ["✍️ 4F 히브리어 블로그", "초안 5편 완료 · 티스토리 등록 진행 중 · 발행 승인 대기"],
+      ["✍️ 4F 히브리어 블로그", "초안 5편 완료 · 블로그 개설(hebrew-bible-note.tistory.com) · 발행 승인 대기"],
       ["🎁 3F 경품·이벤트팀", "근무 " + work3 + " / 3명 · 대형 경품 승인 대기 " + r + "건"],
       ["🍼 2F 다자녀 혜택팀", "근무 " + work2 + " / 3명 · 신청 가능 4건"],
       ["☕ 1F 탕비실", restingAt("1f-pantry").length + "명 휴식 중"],
@@ -1875,6 +2024,20 @@ window.__BLOG_POSTS = [{"id":"01","no":"①","file":"01-성경-히브리어-입�
     if (bt) {
       ev.stopPropagation();
       setBriefCollapsed(!briefCollapsed);
+      return;
+    }
+
+    var bulk = ev.target.closest("[data-bulk]");
+    if (bulk) {
+      ev.stopPropagation();
+      if (bulk.getAttribute("data-bulk") === "rest") bulkRest(); else bulkReturn();
+      return;
+    }
+
+    var go = ev.target.closest("[data-goto]");
+    if (go) {
+      ev.stopPropagation();
+      gotoSpot(go.getAttribute("data-goto"));
       return;
     }
 
@@ -1957,6 +2120,7 @@ window.__BLOG_POSTS = [{"id":"01","no":"①","file":"01-성경-히브리어-입�
     renderDesks();
     renderRestAreas();
     renderFloorStats();
+    renderStaffBar();
     renderBriefSummary();
     renderDecisions();
     renderLog();
@@ -1966,6 +2130,7 @@ window.__BLOG_POSTS = [{"id":"01","no":"①","file":"01-성경-히브리어-입�
   initState();
   restoreState();
   renderAll();
+  scheduleRoam();
 
   /* ---------------- PWA service worker ---------------- */
   if ("serviceWorker" in navigator && location.protocol.indexOf("http") === 0) {
