@@ -1519,19 +1519,27 @@ window.__BLOG_POSTS = [{"id":"01","no":"①","file":"01-성경-히브리어-입�
     flashRoom(spot);
   }
 
+  function refreshStaffCard(s) {
+    var old = document.querySelector('[data-card="' + s.id + '"]');
+    if (!old) return;
+    old.outerHTML = staffCard(s);
+  }
+
   function roamTick() {
-    var resting = staff.filter(function (s) { return !s.working; });
-    if (resting.length) {
-      var s = resting[Math.floor(Math.random() * resting.length)];
-      var others = REST_SPOTS.filter(function (p) { return p !== s.rest.spot; });
-      var next = others[Math.floor(Math.random() * others.length)] || REST_SPOTS[0];
-      s.rest.spot = next;
-      s.rest.bubble = pickBubble(next);
-      renderDesks();
-      renderRestAreas();
-      renderBriefSummary();
-      if (openId && reading === null) renderDrawer();
-      flashRoom(next);
+    /* 보고 모달을 읽는 중이거나 탭이 가려져 있으면 이동을 잠시 멈춥니다 */
+    if (!openId && !document.hidden) {
+      var resting = staff.filter(function (s) { return !s.working; });
+      if (resting.length) {
+        var s = resting[Math.floor(Math.random() * resting.length)];
+        var others = REST_SPOTS.filter(function (p) { return p !== s.rest.spot; });
+        var next = others[Math.floor(Math.random() * others.length)] || REST_SPOTS[0];
+        s.rest.spot = next;
+        s.rest.bubble = pickBubble(next);
+        refreshStaffCard(s);
+        renderRestAreas();
+        renderBriefSummary();
+        flashRoom(next);
+      }
     }
     scheduleRoam();
   }
