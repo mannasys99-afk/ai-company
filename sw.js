@@ -18,7 +18,12 @@ self.addEventListener("install", function (event) {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(function (cache) {
-        return cache.addAll(PRECACHE).catch(function () {
+        /* GitHub Pages는 파일을 10분간 HTTP 캐시로 내려줍니다. 그 예전 사본이
+         * 새 캐시에 들어가지 않도록, 설치할 때는 캐시를 건너뛰고 새로 받습니다. */
+        var requests = PRECACHE.map(function (url) {
+          try { return new Request(url, { cache: "reload" }); } catch (e) { return url; }
+        });
+        return cache.addAll(requests).catch(function () {
           /* 일부 파일이 없어도 설치는 계속 진행 */
           return undefined;
         });
