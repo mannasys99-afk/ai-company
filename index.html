@@ -452,6 +452,47 @@
   .btn.pr-back-btn{flex:0 0 auto; font-size:12px; font-weight:800; padding:10px 13px; border-radius:10px; background:rgba(148,163,184,.12); color:#dbe6f7; border:1px solid var(--line2)}
   .btn.pr-back-btn:hover{background:rgba(148,163,184,.22)}
 
+  /* ---------- 전 직원 업무 진행 현황 (4F 비서실 · 한눈에 보기) ---------- */
+  .glance{margin-top:10px; padding:10px 12px 11px; border:1px solid rgba(56,189,248,.30); border-radius:13px;
+    background:linear-gradient(180deg, rgba(56,189,248,.09), rgba(2,6,16,.45) 62%)}
+  .glance-head{display:flex; align-items:center; gap:8px; flex-wrap:wrap}
+  .glance-title{display:flex; align-items:center; gap:6px; font-size:12.8px; font-weight:800; letter-spacing:-.15px; color:#eaf6ff}
+  .glance-title .gl-hint{font-size:10.2px; font-weight:700; color:var(--dim); letter-spacing:0}
+  .glance-sum{margin-left:auto; display:flex; align-items:center; gap:5px; flex-wrap:wrap; font-size:10.4px; font-weight:800}
+  .glance-sum span{padding:2px 7px; border-radius:999px; border:1px solid var(--line2); background:rgba(2,6,16,.55); color:#c7d3e8; font-variant-numeric:tabular-nums; white-space:nowrap}
+  .glance-sum .w{color:#86efac; border-color:rgba(52,211,153,.35); background:rgba(16,185,129,.1)}
+  .glance-sum .r{color:#fcd34d; border-color:rgba(245,185,66,.32); background:rgba(245,185,66,.07)}
+  .glance-sum .a{color:#fca5a5; border-color:rgba(248,113,113,.35); background:rgba(248,113,113,.08)}
+  .glance-sum .i{color:#93e3ff; border-color:rgba(56,189,248,.35); background:rgba(56,189,248,.08)}
+  .gl-list{display:flex; flex-direction:column; gap:6px; margin-top:8px}
+  .gl-row{position:relative; display:flex; flex-direction:column; gap:1px; width:100%; text-align:left; overflow:hidden;
+    -webkit-appearance:none; appearance:none; font-family:inherit; color:inherit;
+    border:1px solid var(--line); border-radius:10px; background:rgba(8,14,28,.6);
+    padding:6px 9px 9px; cursor:pointer; transition:border-color .14s ease, background .14s ease}
+  .gl-row:hover{border-color:rgba(125,211,252,.55); background:rgba(56,189,248,.09)}
+  .gl-row:focus-visible{outline:2px solid #7dd3fc; outline-offset:2px}
+  .gl-row.resting{background:linear-gradient(90deg, rgba(245,185,66,.08), rgba(8,14,28,.62) 46%)}
+  .gl-line{display:flex; align-items:center; gap:6px; min-width:0}
+  .gl-e{flex:0 0 auto; font-size:14px; line-height:1}
+  .gl-n{flex:0 1 auto; min-width:0; font-size:12px; font-weight:800; color:#eef4ff; letter-spacing:-.2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+  .gl-fl{flex:0 0 auto; font-family:var(--mono); font-size:9.4px; font-weight:800; padding:0 4px; border-radius:5px; color:#0b1020; background:#94a3b8; line-height:15px}
+  .gl-fl.f4{background:var(--amber)}
+  .gl-fl.f3{background:var(--blue)}
+  .gl-fl.f2{background:var(--purple)}
+  .gl-pill{flex:0 0 auto; display:inline-flex; align-items:center; gap:5px; font-size:9.8px; font-weight:800; padding:1px 7px; border-radius:999px; white-space:nowrap}
+  .gl-pill .dot{width:6px; height:6px; border-radius:50%}
+  .gl-pill.work{color:#86efac; border:1px solid rgba(52,211,153,.4); background:rgba(16,185,129,.12)}
+  .gl-pill.work .dot{background:#22c55e; box-shadow:0 0 8px #22c55e}
+  .gl-pill.rest{color:#fcd34d; border:1px solid rgba(245,185,66,.36); background:rgba(245,185,66,.1)}
+  .gl-pill.rest .dot{background:#f5b942; box-shadow:0 0 8px #f5b942}
+  .gl-pct{margin-left:auto; flex:0 0 auto; font-family:var(--mono); font-size:10.4px; font-weight:800; color:#7dd3fc; font-variant-numeric:tabular-nums}
+  .gl-task{font-size:11.2px; font-weight:700; color:#dbe6f7; letter-spacing:-.1px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+  .gl-why{font-size:10.2px; font-weight:700; color:#fbbf24; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+  .gl-why.info{color:#93e3ff}
+  .gl-bar{position:absolute; left:0; bottom:0; width:100%; height:3px; background:rgba(148,163,184,.2)}
+  .gl-bar span{display:block; height:100%; background:linear-gradient(90deg,#38bdf8,#34d399)}
+  .gl-bar span.paused{background:linear-gradient(90deg,#f5b942,#fbbf24)}
+
   @media (max-width: 820px){
     .lobby{grid-template-columns:1fr}
     .brief-grid{grid-template-columns:1fr}
@@ -466,41 +507,161 @@
     .suite.suite4 > .card.owner{grid-column:auto}
   }
   @media (max-width: 640px){
-    .wrap{padding:0 11px 60px}
-    .topbar-in{padding:9px 11px; flex-wrap:nowrap; align-items:center; gap:8px}
-    .brand{gap:8px; min-width:0}
-    .brand h1{font-size:14px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+    .wrap{padding:0 9px 52px}
+    .topbar-in{padding:7px 9px; flex-wrap:nowrap; align-items:center; gap:7px}
+    .brand{gap:7px; min-width:0}
+    .brand h1{font-size:13px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
     .brand .sub{display:none}
-    .logo{width:34px;height:34px;font-size:18px;border-radius:10px}
+    .logo{width:30px;height:30px;font-size:16px;border-radius:9px}
     .clockbox{margin-left:auto; align-items:flex-end; flex:0 0 auto}
-    .clock-date{font-size:10px; white-space:nowrap}
-    .clock-time{font-size:19px}
-    .pill.kst{font-size:9px}
-    .brief{padding:11px; border-radius:14px}
-    .brief-title{font-size:14.5px}
-    .counts{grid-template-columns:1fr}
-    .tab{font-size:13px; padding:10px 6px}
-    .grid-3{grid-template-columns:1fr}
-    .floor-body{padding:9px}
-    .ap-actions{width:100%; justify-content:flex-end}
-    .btn{padding:8px 16px}
-    .scene{min-height:150px}
+    .clock-date{font-size:9.5px; white-space:nowrap}
+    .clock-time{font-size:17px}
+    .pill.kst{font-size:8.5px; padding:1px 4px}
+
+    .brief{margin-top:10px; padding:9px 10px; border-radius:14px}
+    .brief-head{gap:8px}
+    .brief-title{font-size:13px; gap:6px}
+    .brief-title .ic{font-size:15px}
+    .brief-title .pill{font-size:9px; padding:1px 5px}
+    .brief-sub{font-size:10.3px; line-height:1.4}
+    .brief-toggle{font-size:10.5px; padding:4px 9px}
+    .redbadge{font-size:10.5px; padding:3px 8px}
+    .brief-mini{font-size:10.5px; padding:2px 7px}
+    .brief-line{margin-top:8px; font-size:10.6px; padding:6px 8px; gap:4px 6px; border-radius:9px}
+    .counts{grid-template-columns:1fr 1fr; gap:6px; margin-top:8px}
+    .count{padding:6px 8px; gap:6px; border-radius:10px}
+    .count .lamp{width:9px; height:9px}
+    .count .num{font-size:15px}
+    .count .lbl{font-size:9.6px}
+    .count .lbl b{font-size:10.6px}
+    .count .state{display:none}
+
+    .glance{margin-top:8px; padding:8px 9px 9px; border-radius:12px}
+    .glance-title{font-size:11.4px; gap:5px}
+    .glance-title .gl-hint{font-size:9px}
+    .glance-sum{font-size:9.2px; gap:4px}
+    .glance-sum span{padding:1px 5px}
+    .gl-list{margin-top:6px; gap:5px}
+    .gl-row{padding:5px 7px 8px; border-radius:9px}
+    .gl-line{gap:5px}
+    .gl-e{font-size:13px}
+    .gl-n{font-size:10.8px}
+    .gl-fl{font-size:8.4px; padding:0 3px; line-height:13px}
+    .gl-pill{font-size:9px; padding:1px 5px; gap:4px}
+    .gl-task{font-size:10.2px}
+    .gl-why{font-size:9.4px}
+    .gl-pct{font-size:9.4px}
+
+    .ap-list{margin-top:9px; gap:6px}
+    .ap-item{padding:7px 8px; gap:7px; border-radius:10px}
+    .ap-main{flex:1 1 100%}
+    .ap-title{font-size:11.8px}
+    .ap-detail{font-size:10.4px}
+    .ap-note{font-size:9.6px}
+    .ap-actions{width:100%; justify-content:flex-end; gap:5px}
+    .btn{padding:7px 14px; font-size:11.6px; border-radius:8px}
+    .verdict{font-size:10.5px; padding:3px 7px}
+
+    .tabs{gap:7px; margin-top:10px}
+    .tab{font-size:12.2px; padding:9px 6px; border-radius:11px}
+    .hint{font-size:10.2px; margin-top:8px; gap:6px}
+    .staff-bar{margin-top:8px; padding:6px 8px; gap:6px}
+    .staff-bar .lb{font-size:10.2px}
+    .btn-toggle.bulk{padding:5px 9px; font-size:10.4px}
+    .staff-bar .sp{font-size:9.2px}
+
+    .floor{margin-top:10px; border-radius:13px}
+    .floor-head{padding:7px 9px; gap:7px}
+    .floor-num{font-size:11.5px; padding:2px 7px}
+    .floor-name{font-size:12.6px; gap:5px}
+    .floor-name .em{font-size:12.6px}
+    .floor-meta{font-size:9.6px}
+    .floor-meta .stat{padding:1px 6px}
+    .floor-body{padding:8px}
+    .grid-3{grid-template-columns:repeat(2, minmax(0,1fr)); gap:7px}
+    .suite{gap:7px}
+    .suite-slot{min-width:0}
+
+    .card{padding:7px 8px 8px; border-radius:12px}
+    .card-top{gap:5px; margin-bottom:2px}
+    .chip{font-size:9.2px; padding:2px 6px; gap:4px}
+    .chip .dot{width:6px; height:6px}
+    .btn-toggle{font-size:9.6px; padding:4px 6px; border-radius:7px}
+    .scene{min-height:112px; padding:28px 2px 0; gap:3px}
+    .card.desk-card.resting .scene{padding-top:26px}
+    .bubble{font-size:9.8px; padding:4px 7px; border-radius:8px}
+    .bubble::after{width:7px; height:7px; bottom:-3px}
+    .ava{width:42px; height:42px; font-size:23px; border-width:1.5px}
+    .ava.xl{width:54px; height:54px; font-size:29px}
+    .ava.empty{font-size:20px}
+    .tag{font-size:9.2px; padding:1px 6px}
+    .laptop{width:40px; height:26px}
+    .laptop .scr{left:3px; width:34px; height:20px}
+    .laptop .base{width:40px; height:5px}
+    .plank{width:66px; height:6px; margin-top:1px}
+    .vacant-note{margin-top:3px; font-size:8.8px; padding:1px 5px}
+    .role{font-size:9.6px; margin-bottom:5px; gap:4px; min-height:0}
+    .peek{font-size:8.6px; line-height:13px; padding:0 4px}
+    .led{padding:4px 5px; gap:5px; border-radius:7px}
+    .led-tag{font-size:8.4px; letter-spacing:.1em}
+    .led-move span{font-size:9.2px; padding-right:40px}
+    .led-static{font-size:9.2px}
+    .led-idle{font-size:9px}
+    .sec-stats{padding-top:6px; gap:3px}
+    .sec-row{font-size:9.6px; padding-top:3px}
+    .rule{margin-top:7px; font-size:10.2px; padding:6px 8px; gap:6px; border-radius:8px}
+
+    .lobby{grid-template-columns:1fr; gap:7px}
+    .b1{gap:7px}
+    .room{padding:8px 9px 9px; border-radius:12px}
+    .room-head{font-size:11.6px; margin-bottom:1px}
+    .room-head .cnt{font-size:9.4px; padding:0 5px}
+    .room-desc{font-size:9.8px; margin-bottom:6px}
+    .props{gap:4px}
+    .prop{font-size:9.6px; padding:2px 6px; gap:4px}
+    .prop .e{font-size:11px}
+    .guests{gap:6px; margin-top:7px}
+    .guest{padding:6px 7px; min-width:82px; border-radius:10px}
+    .guest .bubble{font-size:9.4px; max-width:104px}
+    .guest .ava{width:36px; height:36px; font-size:19px}
+    .guest .tag{font-size:8.8px}
+    .mini{font-size:9.4px; padding:2px 6px}
+    .empty{font-size:10.2px; padding:10px 8px; margin-top:8px}
+    .zone{min-height:124px}
+    .zone .empty{min-height:74px; margin-top:6px}
+
+    .panel{padding:11px; border-radius:13px}
+    .panel h2{font-size:13.2px}
+    .panel h3{font-size:11.4px}
+    .summary-row{font-size:10.8px; padding:5px 0}
+    .summary-row .v{font-size:10.4px}
+    .log li{font-size:10.6px; padding:6px 7px}
+    .rules-list{font-size:10.6px; line-height:1.55}
+    footer{margin-top:18px; font-size:9.6px}
+    .toast{font-size:11.4px; padding:9px 12px}
+
     .drawer{left:0; top:auto; bottom:0; width:100%; max-width:100%; max-height:88vh; transform:translateY(16px); border-radius:16px 16px 0 0}
     .drawer.open{transform:translateY(0)}
-    .dr-head{padding:12px 12px 10px}
-    .dr-ava{width:46px; height:46px; font-size:24px}
-    .dr-id h2{font-size:16.5px}
-    .dr-body{padding:11px 12px 4px; gap:10px}
-    .dr-foot{padding:10px 12px 12px}
-    .btn-toggle.big{font-size:12px}
-    .btn.closebtn{padding:10px 14px; font-size:12px}
+    .dr-head{padding:11px 11px 9px; gap:9px}
+    .dr-ava{width:42px; height:42px; font-size:22px}
+    .dr-id h2{font-size:15.5px}
+    .dr-role{font-size:10.6px}
+    .dr-body{padding:10px 11px 2px; gap:9px}
+    .dr-task{font-size:12.6px}
+    .dr-list li{font-size:11.2px}
+    .dr-foot{padding:9px 11px 11px}
+    .btn-toggle.big{font-size:11.6px; padding:9px 10px}
+    .btn.closebtn{padding:9px 13px; font-size:11.4px}
     .drawer.wide{width:100%}
-    .pr-body{font-size:13px; line-height:1.85}
-    .pr-title{font-size:15.5px}
-    .pr-body table{font-size:11.2px}
-    .post-list li{gap:6px; padding:7px 8px}
-    .pl-title{font-size:11.8px}
-    .pl-read{padding:6px 9px}
+    .pr-body{font-size:12.4px; line-height:1.8}
+    .pr-title{font-size:14.6px}
+    .pr-body table{font-size:10.8px}
+    .post-list li{gap:6px; padding:6px 7px}
+    .pl-title{font-size:11.2px}
+    .pl-desc{font-size:10.2px}
+    .pl-read{padding:5px 8px; font-size:10.2px}
+    .tb-status{padding:6px 7px; gap:5px}
+    .blog-sub{font-size:10.2px}
   }
 </style>
 </head>
@@ -549,6 +710,15 @@
       <span>결정 <span class="tally"><span class="a" id="okTally">✔ 0</span><span class="b" id="noTally">✖ 0</span></span></span>
     </div>
 
+    <!-- 전 직원 업무 진행 현황 — 한눈에 보기 (행을 누르면 그 직원의 상세 보고가 열립니다) -->
+    <section class="glance" id="glanceBoard" aria-label="전 직원 업무 진행 현황 한눈에 보기">
+      <div class="glance-head">
+        <div class="glance-title"><span aria-hidden="true">📊</span> 전 직원 업무 진행 현황 <span class="gl-hint">한눈에 보기 · 행을 누르면 상세 보고</span></div>
+        <div class="glance-sum" id="glanceSum"></div>
+      </div>
+      <div class="gl-list" id="glList" aria-live="polite"></div>
+    </section>
+
     <div class="counts">
       <div class="count blue">
         <span class="lamp" aria-hidden="true"></span>
@@ -575,7 +745,7 @@
 
   <div class="hint">
     <span class="k">TIP</span>
-    <span>직원 카드를 <b>클릭</b>하면 <b>업무 진행 보고</b>가 열립니다(1F·B1에서 쉬는 직원도 동일). <b>☕ 쉬게 하기</b>를 누르면 책상은 <b>빈 의자</b>로 남고 캐릭터는 <b>1F 탕비실 · B1 휴게실·오락실·노래방</b>으로 내려가 <b>12~15초마다 자유롭게 옮겨 다닙니다</b>. <b>💻 복귀시키기</b>로 다시 책상으로 부를 수 있어요. <b>✍️ 히브리어 작가</b> 카드에서는 초안 5편을 모달 안에서 바로 읽고 복사할 수 있습니다.</span>
+    <span>직원 카드를 <b>클릭</b>하면 <b>업무 진행 보고</b>가 열립니다(1F·B1에서 쉬는 직원도 동일). 위 <b>📊 전 직원 업무 진행 현황</b>은 행을 누르면 그 직원의 보고로 바로 이동합니다. <b>☕ 쉬게 하기</b>를 누르면 책상은 <b>빈 의자</b>로 남고 캐릭터는 <b>1F 탕비실 · B1 휴게실·오락실·노래방</b>으로 내려가 <b>12~15초마다 자유롭게 옮겨 다닙니다</b>. <b>💻 복귀시키기</b>로 다시 책상으로 부를 수 있어요. <b>✍️ 히브리어 작가</b> 카드에서는 초안 5편을 모달 안에서 바로 읽고 복사할 수 있습니다.</span>
   </div>
 
   <div class="staff-bar">
@@ -870,6 +1040,7 @@ window.__BLOG_POSTS = [{"id":"01","no":"①","file":"01-성경-히브리어-입�
       workBubble: "항공권 이벤트 조건 검토 중!",
       task: "✈️ 제주 항공권 이벤트 조건 검토 · 입력 항목 확인",
       progress: 62,
+      gate: { kind: "approval", label: "경품 9건 정리 · 대형 2건(항공권·자동차) 대표 승인" },
       report: {
         done: [
           "공공누리 유형 퀴즈 응모 양식 확인 — 연락처만 입력, 마감 11/22 · 발표 11/24",
@@ -896,6 +1067,7 @@ window.__BLOG_POSTS = [{"id":"01","no":"①","file":"01-성경-히브리어-입�
       workBubble: "개인정보 심한 건은 걸러냈어요!",
       task: "🔎 응모 24건 개인정보 필터 검수 · 대형 경품 승인 요청 정리",
       progress: 78,
+      gate: { kind: "approval", label: "필터 24건 검수 완료 · 대형 3건 승인 요청" },
       report: {
         done: [
           "응모 24건 검수 완료 — 주민번호·계좌·카드정보를 요구한 5건 제외",
@@ -922,6 +1094,7 @@ window.__BLOG_POSTS = [{"id":"01","no":"①","file":"01-성경-히브리어-입�
       workBubble: "응모 12건 완료!",
       task: "📨 오늘 응모 12건 실행 · 당첨 발표 4건 추적",
       progress: 55,
+      gate: { kind: "approval", label: "18:00 응모 배치 준비 · 신규 제출 승인" },
       report: {
         done: [
           "오늘 응모 12건 제출 완료 — 결제·구매 없는 무료 응모만",
@@ -948,6 +1121,7 @@ window.__BLOG_POSTS = [{"id":"01","no":"①","file":"01-성경-히브리어-입�
       workBubble: "전기요금 감면 조항 확인 중!",
       task: "⚡ 전기·도시가스·지역난방 3종 감면 대상 확인",
       progress: 68,
+      gate: { kind: "info", label: "거주지 시/구·주거 형태 확인" },
       report: {
         done: [
           "한전 복지할인 확인 — 주택용 요금 30%, 월 16,000원 한도, 신청한 달부터 적용(소급 없음)",
@@ -974,6 +1148,7 @@ window.__BLOG_POSTS = [{"id":"01","no":"①","file":"01-성경-히브리어-입�
       workBubble: "지자체 12곳 비교 중!",
       task: "🗺️ 지자체 12곳 혜택 비교 · 신청 가능 4건 정리",
       progress: 45,
+      gate: { kind: "info", label: "거주지 시/구 확인" },
       report: {
         done: [
           "지자체 12곳 상하수도·공영주차·체육·문화시설 감면 비교표 작성",
@@ -1000,6 +1175,7 @@ window.__BLOG_POSTS = [{"id":"01","no":"①","file":"01-성경-히브리어-입�
       workBubble: "신청서 작성 중!",
       task: "🪪 고속도로·KTX·K-패스 3종 신청 준비",
       progress: 30,
+      gate: { kind: "info", label: "본인인증·주민등록 정보 동의 필요" },
       report: {
         done: [
           "고속도로 통행료 감면 요건 정리 — 3자녀 20%, 주말·공휴일, 하이패스 등록 필수, 2026.7.28~2029.8.21 한시",
@@ -1026,6 +1202,7 @@ window.__BLOG_POSTS = [{"id":"01","no":"①","file":"01-성경-히브리어-입�
       workBubble: "히브리어 블로그 쓰는 중!",
       task: "✍️ 성경 히브리어 블로그 — 초안 5편 완료 → hebrew-bible-note.tistory.com 등록·발행 준비",
       progress: 62,
+      gate: { kind: "approval", label: "티스토리 5편 임시저장 완료 · 발행 승인" },
       report: {
         done: [
           "✅ 초안 5편 작성 완료 — ① 알파벳 입문 ② 니쿠드 ③ 핵심 단어 5선 ④ 창세기 1:1 ⑤ 무료 독학 사이트",
@@ -1413,6 +1590,51 @@ window.__BLOG_POSTS = [{"id":"01","no":"①","file":"01-성경-히브리어-입�
     $("#f4stat").textContent = "보고 대기 " + pending().length + "건";
   }
 
+  /* ---------------- 4F 비서실 · 전 직원 업무 진행 현황 (한눈에 보기) ----------------
+     직원 7명의 근무/휴식, 막힌 이유, 진행률을 한 표에 모아 보여 줍니다.
+     행을 누르면 그 직원의 상세 보고(drawer)가 열리고, 근무·휴식 상태가 바뀌면 숫자도 같이 갱신됩니다. */
+  function floorRank(s) { return s.team === "4f" ? 0 : s.team === "3f" ? 1 : 2; }
+
+  function glanceRow(s) {
+    var fi = FLOOR_INFO[s.team] || DEFAULT_FLOOR;
+    var place = SPOTS[s.rest.spot] || "1F 탕비실";
+    var gate = s.gate || null;
+    var pct = Math.max(0, Math.min(100, s.progress));
+    var why = gate
+      ? '<span class="gl-why' + (gate.kind === "info" ? " info" : "") + '">' +
+          (gate.kind === "info" ? "💡 정보 대기 · " : "⏳ 승인 대기 · ") + esc(gate.label) + '</span>'
+      : "";
+    return '<button type="button" class="gl-row' + (s.working ? "" : " resting") + '" data-report="' + esc(s.id) + '" ' +
+        'aria-label="' + esc(s.name + " 업무 진행 보고 열기 — " + (s.working ? "근무 중" : "휴식 중 · " + place)) + '">' +
+      '<span class="gl-line">' +
+        '<span class="gl-e" aria-hidden="true">' + s.emoji + '</span>' +
+        '<span class="gl-n">' + esc(s.name) + '</span>' +
+        '<span class="gl-fl ' + esc(s.team) + '">' + esc(fi.num) + '</span>' +
+        '<span class="gl-pill ' + (s.working ? "work" : "rest") + '"><span class="dot"></span>' +
+          esc(s.working ? "근무 중" : "휴식 중 · " + place) + '</span>' +
+        '<span class="gl-pct">' + pct + '%</span>' +
+      '</span>' +
+      '<span class="gl-task">' + esc(s.task) + '</span>' +
+      why +
+      '<span class="gl-bar" aria-hidden="true"><span class="' + (s.working ? "" : "paused") + '" style="width:' + pct + '%"></span></span>' +
+    '</button>';
+  }
+
+  function renderGlance() {
+    var list = $("#glList"), sum = $("#glanceSum");
+    if (!list || !sum) return;
+    list.innerHTML = staff.slice().sort(function (a, b) { return floorRank(a) - floorRank(b); }).map(glanceRow).join("");
+    var w = staff.filter(function (s) { return s.working; }).length;
+    var rest = staff.length - w;
+    var ap = staff.filter(function (s) { return s.gate && s.gate.kind !== "info"; }).length;
+    var inf = staff.filter(function (s) { return s.gate && s.gate.kind === "info"; }).length;
+    sum.innerHTML =
+      '<span class="w">근무 ' + w + '명</span>' +
+      '<span class="r">휴식 ' + rest + '명</span>' +
+      (ap ? '<span class="a">승인 대기 ' + ap + '명</span>' : "") +
+      (inf ? '<span class="i">정보 대기 ' + inf + '명</span>' : "");
+  }
+
   function toggleStaff(id) {
     var s = staff.filter(function (x) { return x.id === id; })[0];
     if (!s) return;
@@ -1428,6 +1650,7 @@ window.__BLOG_POSTS = [{"id":"01","no":"①","file":"01-성경-히브리어-입�
     renderFloorStats();
     renderStaffBar();
     renderBriefSummary();
+    renderGlance();
     if (openId) {
       renderDrawer();
       if (openId === s.id) {
@@ -1474,6 +1697,7 @@ window.__BLOG_POSTS = [{"id":"01","no":"①","file":"01-성경-히브리어-입�
     renderFloorStats();
     renderStaffBar();
     renderBriefSummary();
+    renderGlance();
     if (openId && reading === null) renderDrawer();
     saveState();
   }
@@ -1538,6 +1762,7 @@ window.__BLOG_POSTS = [{"id":"01","no":"①","file":"01-성경-히브리어-입�
         refreshStaffCard(s);
         renderRestAreas();
         renderBriefSummary();
+        renderGlance();
         flashRoom(next);
       }
     }
@@ -2130,6 +2355,7 @@ window.__BLOG_POSTS = [{"id":"01","no":"①","file":"01-성경-히브리어-입�
     renderFloorStats();
     renderStaffBar();
     renderBriefSummary();
+    renderGlance();
     renderDecisions();
     renderLog();
     applyBriefState();
