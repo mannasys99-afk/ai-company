@@ -75,6 +75,66 @@
   .pill{font-size:10px; font-weight:700; letter-spacing:.08em; padding:2px 6px; border-radius:999px; border:1px solid var(--line2); color:var(--muted)}
   .pill.kst{color:#7dd3fc; border-color:rgba(56,189,248,.4); background:rgba(56,189,248,.08)}
 
+  /* ---------- 바로가기 + 전 직원 실시간 업무 보드 (사무실 맨 위) ---------- */
+  .quickbar{margin-top:14px; display:flex; align-items:center; gap:7px; flex-wrap:wrap;
+    padding:9px 11px; border-radius:14px; border:1px solid rgba(56,189,248,.30);
+    background:linear-gradient(180deg, rgba(56,189,248,.10), rgba(56,189,248,.02)), rgba(11,18,32,.9);
+    box-shadow:0 10px 26px rgba(0,0,0,.28)}
+  .qb-lb{font-size:11px; font-weight:800; color:#93e3ff; letter-spacing:.02em; margin-right:2px; white-space:nowrap}
+  .qb{display:inline-flex; align-items:center; gap:5px; text-decoration:none; font-size:12px; font-weight:800;
+    color:#e6f4ff; background:rgba(2,8,20,.55); border:1px solid rgba(148,163,184,.28); border-radius:999px;
+    padding:5px 11px; white-space:nowrap; transition:all .14s ease}
+  .qb:hover{border-color:rgba(125,211,252,.65); background:rgba(56,189,248,.16); color:#fff; transform:translateY(-1px)}
+  .qb:focus-visible{outline:2px solid #7dd3fc; outline-offset:2px}
+
+  .topstrip{margin-top:10px; padding:10px 12px 11px; border-radius:16px;
+    border:1px solid rgba(245,185,66,.28);
+    background:linear-gradient(180deg, rgba(245,185,66,.08), rgba(5,11,22,.55) 46%), rgba(9,15,28,.92);
+    box-shadow:0 14px 34px rgba(0,0,0,.3)}
+  .ts-head{display:flex; align-items:center; gap:8px; flex-wrap:wrap}
+  .ts-title{display:flex; align-items:center; gap:6px; font-size:13px; font-weight:800; letter-spacing:-.2px; color:#fff4dc}
+  .ts-hint{font-size:10.3px; font-weight:700; color:var(--dim); letter-spacing:0}
+  .ts-hint b{color:#93e3ff}
+  .ts-sum{margin-left:auto; display:flex; align-items:center; gap:5px; flex-wrap:wrap; font-size:10.4px; font-weight:800}
+  .ts-sum span{padding:2px 7px; border-radius:999px; border:1px solid var(--line2); background:rgba(2,6,16,.55); color:#c7d3e8; font-variant-numeric:tabular-nums; white-space:nowrap}
+  .ts-sum .w{color:#86efac; border-color:rgba(52,211,153,.35); background:rgba(16,185,129,.1)}
+  .ts-sum .r{color:#fcd34d; border-color:rgba(245,185,66,.32); background:rgba(245,185,66,.07)}
+  .ts-sum .a{color:#fca5a5; border-color:rgba(248,113,113,.35); background:rgba(248,113,113,.08)}
+  .ts-list{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:6px; margin-top:8px}
+  .ts-item{position:relative; display:flex; align-items:center; gap:8px; width:100%; min-width:0; text-align:left;
+    font-family:inherit; color:inherit; cursor:pointer; overflow:hidden; padding:7px 9px 9px; border-radius:11px;
+    border:1px solid var(--line); background:linear-gradient(90deg, rgba(14,23,40,.92), rgba(8,14,27,.74));
+    transition:border-color .14s ease, background .14s ease}
+  .ts-item:hover{border-color:rgba(125,211,252,.5); background:rgba(56,189,248,.10)}
+  .ts-item:focus-visible{outline:2px solid #7dd3fc; outline-offset:2px}
+  .ts-item.resting{background:linear-gradient(90deg, rgba(245,185,66,.09), rgba(8,14,27,.7) 52%)}
+  .ts-face{flex:0 0 auto; width:30px; height:30px; border-radius:9px; object-fit:cover; object-position:50% 4%;
+    background:radial-gradient(circle at 35% 25%, #24344f, #0d1728); border:1px solid rgba(148,163,184,.3)}
+  .ts-main{display:flex; flex-direction:column; gap:2px; min-width:0; flex:1 1 auto}
+  .ts-l1{display:flex; align-items:center; gap:5px; min-width:0}
+  .ts-n{flex:0 1 auto; min-width:0; font-size:12px; font-weight:800; color:#f2f7ff; letter-spacing:-.2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+  .ts-fl{flex:0 0 auto; font-family:var(--mono); font-size:9px; font-weight:800; padding:0 4px; border-radius:5px; color:#0b1020; background:#94a3b8; line-height:14px}
+  .ts-fl.f4{background:var(--amber)}
+  .ts-fl.f3{background:var(--blue)}
+  .ts-fl.f2{background:var(--purple)}
+  .ts-right{margin-left:auto; flex:0 0 auto; display:inline-flex; align-items:center; gap:4px}
+  .ts-dot{width:6px; height:6px; border-radius:50%; background:#22c55e; box-shadow:0 0 7px #22c55e}
+  .ts-item.resting .ts-dot{background:#f5b942; box-shadow:0 0 7px #f5b942}
+  .ts-st{font-size:9.4px; font-weight:800; color:#86efac; white-space:nowrap}
+  .ts-item.resting .ts-st{color:#fcd34d}
+  .ts-pct{font-family:var(--mono); font-size:10px; font-weight:800; color:#7dd3fc; font-variant-numeric:tabular-nums}
+  .ts-task{font-size:10.6px; font-weight:700; color:#dbe6f7; letter-spacing:-.1px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+  .ts-bar{position:absolute; left:0; bottom:0; width:100%; height:3px; background:rgba(148,163,184,.18)}
+  .ts-bar span{display:block; height:100%; background:linear-gradient(90deg,#38bdf8,#34d399)}
+  .ts-bar span.paused{background:linear-gradient(90deg,#f5b942,#fbbf24)}
+
+  /* 보고 모달 안 바로가기 */
+  .dr-links{display:flex; align-items:center; gap:6px; flex-wrap:wrap; padding:8px 14px; border-bottom:1px solid var(--line); background:rgba(56,189,248,.06)}
+  .dr-links a{display:inline-flex; align-items:center; gap:4px; text-decoration:none; font-size:11.5px; font-weight:800;
+    color:#e6f4ff; padding:5px 10px; border-radius:999px; border:1px solid rgba(56,189,248,.34); background:rgba(2,8,20,.55); transition:all .14s ease}
+  .dr-links a:hover{border-color:rgba(125,211,252,.7); background:rgba(56,189,248,.18); color:#fff}
+  .dr-links a:focus-visible{outline:2px solid #7dd3fc; outline-offset:2px}
+
   /* ---------- secretary brief ---------- */
   .brief{
     margin-top:18px; border-radius:18px; padding:14px;
@@ -546,6 +606,26 @@
     .clock-time{font-size:17px}
     .pill.kst{font-size:8.5px; padding:1px 4px}
 
+    .quickbar{margin-top:8px; padding:7px 8px; gap:5px; border-radius:12px}
+    .qb-lb{font-size:9.8px}
+    .qb{font-size:10.4px; padding:4px 8px; gap:4px}
+    .topstrip{margin-top:8px; padding:8px 9px 9px; border-radius:13px}
+    .ts-head{gap:6px}
+    .ts-title{font-size:11.4px; gap:5px; flex-wrap:wrap}
+    .ts-hint{font-size:9px}
+    .ts-sum{font-size:9.2px; gap:4px}
+    .ts-sum span{padding:1px 5px}
+    .ts-list{grid-template-columns:repeat(2, minmax(0,1fr)); gap:5px; margin-top:6px}
+    .ts-item{padding:5px 7px 8px; border-radius:9px; gap:6px}
+    .ts-face{width:24px; height:24px; border-radius:7px}
+    .ts-n{font-size:10.8px}
+    .ts-fl{font-size:8.4px; padding:0 3px; line-height:13px}
+    .ts-st{display:none}
+    .ts-pct{font-size:9.4px}
+    .ts-task{font-size:9.6px}
+    .dr-links{padding:6px 10px; gap:5px}
+    .dr-links a{font-size:10.4px; padding:4px 8px}
+
     .brief{margin-top:10px; padding:9px 10px; border-radius:14px}
     .brief-head{gap:8px}
     .brief-title{font-size:13px; gap:6px}
@@ -720,12 +800,30 @@
 
 <div class="wrap">
 
+  <!-- 바로가기 (블로그·애드센스·수원시) -->
+  <nav class="quickbar" aria-label="바로가기">
+    <span class="qb-lb">🔗 바로가기</span>
+    <a class="qb" href="https://hebrew-bible-note.tistory.com" target="_blank" rel="noopener">📖 히브리어 블로그</a>
+    <a class="qb" href="https://hebrew-bible-note.tistory.com/manage" target="_blank" rel="noopener">⚙️ 블로그 관리</a>
+    <a class="qb" href="https://adsense.google.com" target="_blank" rel="noopener">💰 구글 애드센스</a>
+    <a class="qb" href="https://www.suwon.go.kr" target="_blank" rel="noopener">🏛️ 수원시 다자녀</a>
+  </nav>
+
+  <!-- 사무실 맨 위 · 전 직원 실시간 업무 보드 (누르면 그 직원의 상세 보고) -->
+  <section class="topstrip" id="topStrip" aria-label="전 직원 실시간 업무 보드">
+    <div class="ts-head">
+      <div class="ts-title"><span aria-hidden="true">📡</span> 전 직원 실시간 업무 보드 <span class="ts-hint">9명 전원 · <b id="tsTime">--:--</b> 기준 · 누르면 상세 보고</span></div>
+      <div class="ts-sum" id="tsSum"></div>
+    </div>
+    <div class="ts-list" id="tsList" aria-live="polite"></div>
+  </section>
+
   <!-- 비서 총괄 보고 -->
   <section class="brief" id="briefPanel" aria-label="비서 총괄 보고">
     <div class="brief-head">
       <div>
         <div class="brief-title"><span class="ic">💼</span> 비서 총괄 보고 <span class="pill">4F 전담 비서</span></div>
-        <div class="brief-sub">3F 경품·이벤트팀 · 2F 다자녀 혜택팀 · 4F 히브리어 블로그 보고 통합 — 대표님 최종 승인만 남았습니다</div>
+        <div class="brief-sub">3F 자동 응모(09·13·19시) · 2F 수원시 장안구 혜택 · 4F 히브리어 블로그 — 지금은 확인·승인 4건만 남았습니다</div>
       </div>
       <div class="brief-tools">
         <span class="brief-mini" id="briefMini">🔵 0 · 🔴 0</span>
@@ -780,7 +878,7 @@
 
   <div class="hint">
     <span class="k">TIP</span>
-    <span>직원 카드를 <b>클릭</b>하면 <b>업무 진행 보고</b>가 열립니다(1F·B1에서 쉬는 직원도 동일). 위 <b>📊 전 직원 업무 진행 현황</b>은 행을 누르면 그 직원의 보고로 바로 이동합니다. <b>☕ 쉬게 하기</b>를 누르면 책상은 <b>빈 의자</b>로 남고 캐릭터는 <b>1F 탕비실 · B1 휴게실·오락실·노래방</b>으로 내려가 <b>12~15초마다 자유롭게 옮겨 다닙니다</b>. <b>💻 복귀시키기</b>로 다시 책상으로 부를 수 있어요. <b>✍️ 히브리어 작가</b> 카드에서는 초안 5편을 모달 안에서 바로 읽고 복사할 수 있습니다.</span>
+    <span>직원 카드를 <b>클릭</b>하면 <b>업무 진행 보고</b>가 열립니다(1F·B1에서 쉬는 직원도 동일). 맨 위 <b>📡 전 직원 실시간 업무 보드</b>와 <b>📊 전 직원 업무 진행 현황</b>은 항목을 누르면 그 직원의 보고로 바로 이동합니다. <b>☕ 쉬게 하기</b>를 누르면 책상은 <b>빈 의자</b>로 남고 캐릭터는 <b>1F 탕비실 · B1 휴게실·오락실·노래방</b>으로 내려가 <b>12~15초마다 자유롭게 옮겨 다닙니다</b>. <b>💻 복귀시키기</b>로 다시 책상으로 부를 수 있어요. <b>✍️ 히브리어 작가</b> 카드에서는 초안 5편을 모달 안에서 바로 읽고 복사할 수 있습니다.</span>
   </div>
 
   <div class="staff-bar">
@@ -861,7 +959,7 @@
       </div>
       <div class="floor-body">
         <div class="grid-3" id="desks3f"></div>
-        <div class="rule"><span class="em">📌</span><span><b>응모 규칙</b> — 개인정보 과다 요구 제외 (이름·전화번호 수준만) · 항공권/자동차 등 대형 경품은 대표님 승인 후 진행</span></div>
+        <div class="rule"><span class="em">📌</span><span><b>응모 규칙</b> — 이름·전화·주소까지만 자동 입력 · 생년월일·계좌·카드 등 추가 개인정보와 유료 응모는 제외 · 항공권·자동차 등 대형 경품도 같은 기준으로 자동 진행 · 하루 3회(09:00·13:00·19:00) 자동 스케줄</span></div>
       </div>
     </section>
 
@@ -869,12 +967,12 @@
     <section class="floor" style="--fl:#a78bfa; --fl-soft:rgba(167,139,250,.16); --fl-line:rgba(167,139,250,.35); --bg:url('assets/bg/floor-2f.webp'); --bg-sm:url('assets/bg/floor-2f-sm.webp')">
       <div class="floor-head">
         <span class="floor-num">2F</span>
-        <span class="floor-name"><span class="em">🍼</span> 대한민국 다자녀 혜택팀 <span class="pill">3자녀 기준</span></span>
+        <span class="floor-name"><span class="em">🍼</span> 수원시 장안구 다자녀 혜택팀 <span class="pill">3자녀 기준</span></span>
         <span class="floor-meta"><span class="stat" id="f2stat">근무 0 · 휴식 0</span></span>
       </div>
       <div class="floor-body">
         <div class="grid-3" id="desks2f"></div>
-        <div class="rule"><span class="em">📌</span><span><b>혜택 규칙</b> — 대한민국 3자녀 이상 다자녀 혜택 조사·보고 및 신청 가능 건은 대표님 승인 후 진행</span></div>
+        <div class="rule"><span class="em">📌</span><span><b>혜택 규칙</b> — 수원시 장안구 거주 3자녀 기준 혜택(상수도·공영주차·경기아이플러스 등) 조사·보고, 신청 가능 건은 대표님 승인 후 신청</span></div>
       </div>
     </section>
 
@@ -1007,6 +1105,7 @@ window.__BLOG_POSTS = [{"id":"01","no":"①","file":"01-성경-히브리어-입�
   /* ---------------- live clock (Asia/Seoul) ---------------- */
   var clockDateEl = $("#clockDate");
   var clockTimeEl = $("#clockTime");
+  var tsTimeEl = $("#tsTime");
 
   function tickClock() {
     var now = new Date();
@@ -1024,6 +1123,7 @@ window.__BLOG_POSTS = [{"id":"01","no":"①","file":"01-성경-히브리어-입�
     var tp = {};
     t.forEach(function (p) { tp[p.type] = p.value; });
     clockTimeEl.textContent = pad(tp.hour) + ":" + pad(tp.minute) + ":" + pad(tp.second);
+    if (tsTimeEl) tsTimeEl.textContent = pad(tp.hour) + ":" + pad(tp.minute);
   }
   tickClock();
   setInterval(tickClock, 500);
@@ -1069,194 +1169,203 @@ window.__BLOG_POSTS = [{"id":"01","no":"①","file":"01-성경-히브리어-입�
 
   var SEED_STAFF = [
     {
-      id: "pop", name: "뽑뽑이", emoji: "🎁", team: "3f", role: "경품·이벤트 응모 담당",
+      id: "pop", name: "뽑뽑이", emoji: "🎁", team: "3f", role: "경품·이벤트·반납없는 체험단 응모 담당",
       working: true,
-      work: "✈️ 제주 항공권 이벤트 조건 검토 중 · 입력 항목 : 이름·전화번호만 확인",
-      workBubble: "항공권 이벤트 조건 검토 중!",
-      task: "✈️ 제주 항공권 이벤트 조건 검토 · 입력 항목 확인",
-      progress: 62,
-      gate: { kind: "approval", label: "경품 9건 정리 · 대형 2건(항공권·자동차) 대표 승인" },
+      work: "🎁 자동 응모 운영 중 · 오늘 09:00·13:00 회차 완료 · 19:00 회차 준비",
+      workBubble: "19:00 응모 회차 준비 중!",
+      task: "🎁 경품·반납없는 체험단 자동 응모 — 09:00·13:00 회차 완료, 19:00 회차 준비",
+      short: "자동 응모 2회차 완료 · 19:00 회차 준비",
+      progress: 72,
+      gate: { kind: "info", label: "19:00 회차 신규 이벤트 검색 중" },
       report: {
         done: [
-          "공공누리 유형 퀴즈 응모 양식 확인 — 연락처만 입력, 마감 11/22 · 발표 11/24",
-          "비짓부산 만족도 조사 입력 항목 점검 — 이름·휴대폰(+이메일), 마감 11/23 23:55",
-          "응모 후보 9건 목록화 — 경기도뉴스포털 · 한박웃음 · 지진안전 · 비짓부산 · 공공누리 · 제주어왓 · E2U · 행안부 모두의광장 · 보조금통합포털"
+          "✅ 하루 3회(09:00·13:00·19:00) 자동 응모 스케줄 가동 — 오늘 09:00·13:00 회차 제출 완료",
+          "✅ 자동 입력 범위 확정 — 이름·전화번호·주소까지만 자동, 생년월일·주민번호·계좌·카드는 제출하지 않음",
+          "✅ 항공권·노트북·자동차 등 대형 경품도 같은 기준으로 자동 진행 — 구매·결제 요구 건은 제외",
+          "✅ 개인정보 과다 요구·유료 응모는 검수 단계에서 걸러냄"
         ],
         doing: [
-          "제주 항공권 이벤트 조건 검토 중 — 이름·전화번호 외 추가 입력 항목이 없는지 확인",
-          "응모 순서 정리 — 마감 임박 순(11/22 공공누리 → 11/23 비짓부산 → 11/27 지진안전)"
+          "🔄 19:00 회차 준비 — 새로 열린 공공·기업 경품과 반납없는 체험단 검색",
+          "🔄 마감 지난 건·중복 응모 제외 목록 갱신"
         ],
         wait: [
-          "✈️ 항공권 경품 응모(마감 오늘 18:00) — 대형 경품이라 대표님 승인 전에는 제출하지 않습니다",
-          "🚗 자동차 리스권 응모(마감 11/27) — 대표님 승인 대기"
+          "⏳ 생년월일·계좌 등 추가 정보가 필요한 건은 대표님 승인 대기",
+          "⏳ 당첨 발표 결과 취합 — 발표일이 지난 응모부터 확인해 보고"
         ]
       },
-      comment: "개인정보는 이름·전화번호까지만 받습니다. 대형 경품 2건만 결재해 주시면 바로 응모합니다.",
-      next: "승인 즉시 항공권 응모 제출 → 발표일(11/24~12/18) 결과 자동 취합",
+      comment: "이름·전화·주소까지만 자동으로 넣고 나머지는 걸러 둡니다. 19:00 회차 준비 중입니다.",
+      next: "19:00 응모 회차 실행 → 제출 확인 캡처 → 당첨 발표 확인 후 비서 보고",
       rest: { spot: "b1-arcade", bubble: "오락실 한 판!" }
     },
     {
       id: "lucky", name: "행운이", emoji: "🍀", team: "3f", role: "이벤트 조건 검수 · 개인정보 필터",
       working: false,
-      work: "🔎 응모 24건 검수 · 개인정보 과다 요구 5건 제외 · 대형 경품 3건 대표님 승인 요청",
+      work: "🔎 19:00 회차 신규 이벤트 검수 중 · 유료·개인정보 과다 요구 건 제외",
       workBubble: "개인정보 심한 건은 걸러냈어요!",
-      task: "🔎 응모 24건 개인정보 필터 검수 · 대형 경품 승인 요청 정리",
-      progress: 78,
-      gate: { kind: "approval", label: "필터 24건 검수 완료 · 대형 3건 승인 요청" },
+      task: "🔎 신규 경품·체험단 검수 — 유료 응모·추가 개인정보 요구 건 제외",
+      short: "신규 이벤트 검수 · 유료 건 제외",
+      progress: 80,
+      gate: { kind: "approval", label: "추가 개인정보 필요 건 대표 승인 요청 정리" },
       report: {
         done: [
-          "응모 24건 검수 완료 — 주민번호·계좌·카드정보를 요구한 5건 제외",
-          "공공기관·공기업 주최만 남김 — 경기도 · 행정안전부 · 부산관광공사 · 공공누리 · 제주학연구센터 · 한국에너지정보문화재단 · 한국재정정보원 · 국립한글박물관",
-          "사칭 주의 체크리스트 작성 — 당첨 안내 문자는 발신번호와 원 공지 페이지 대조"
+          "✅ 응모 검수 기준 확정 — 이름·전화·주소까지만 제출, 그 외 개인정보 요구 건은 제외",
+          "✅ 반납없는 체험단만 대상 — 반납 조건·보증금·배송비 결제 건 제외",
+          "✅ 사칭·당첨 사기 체크리스트 유지 — 발신번호와 원 공지 페이지 대조"
         ],
         doing: [
-          "E2U 퀴즈(E2U 맥북 네오 1 · 에어팟 프로 3) 큰 경품 분류 — 당첨 시 제세공과금 22% 본인 부담 안내문 작성 중",
-          "행안부 모두의광장 지방규제합리화 투표 — 정부통합/일반 로그인 필요 항목 표시"
+          "🔄 19:00 회차 신규 이벤트 검수 중",
+          "🔄 대형 경품 당첨 시 제세공과금 22% 부담 안내문 정리"
         ],
         wait: [
-          "대형 경품 3건 대표님 승인 요청 — E2U · 모두의광장 · 항공권",
-          "구매·결제·앱 설치를 요구하는 응모는 전부 제외 — 추가 확인 필요 없음"
+          "⏳ 생년월일·계좌 등 추가 정보가 필요한 건 — 대표님 승인 요청 목록 정리 중",
+          "⏳ 당첨 시 본인 확인·수령 절차는 대표님 승인 후 진행"
         ]
       },
-      comment: "이름·전화번호만 받는 건만 남겼습니다. 큰 경품 3건은 대표님 결재 후에 진행할게요.",
-      next: "승인 결과를 응모왕에게 전달 → 응모 실행",
+      comment: "이름·전화·주소만 받는 건만 남겼습니다. 추가 정보가 필요한 건은 따로 모아 결재 올릴게요.",
+      next: "검수 결과를 뽑뽑이·응모왕에게 전달 → 19:00 회차 반영",
       rest: { spot: "1f-pantry", bubble: "아메리카노 한 잔!" }
     },
     {
-      id: "entry", name: "응모왕", emoji: "📮", team: "3f", role: "응모 실행 · 결과 취합",
+      id: "entry", name: "응모왕", emoji: "📮", team: "3f", role: "응모 실행 · 당첨 결과 취합",
       working: true,
-      work: "📨 오늘 응모 12건 완료 · 당첨 발표 대기 4건 · 다음 응모 18:00",
-      workBubble: "응모 12건 완료!",
-      task: "📨 오늘 응모 12건 실행 · 당첨 발표 4건 추적",
-      progress: 55,
-      gate: { kind: "approval", label: "18:00 응모 배치 준비 · 신규 제출 승인" },
+      work: "📨 오늘 09:00·13:00 회차 제출 완료 · 19:00 회차 대기 · 당첨 발표 추적 중",
+      workBubble: "2회차 응모 완료!",
+      task: "📨 응모 제출 실행 · 당첨 발표 추적 — 2회차 완료, 19:00 회차 대기",
+      short: "2회차 제출 완료 · 19:00 회차 대기",
+      progress: 68,
+      gate: { kind: "info", label: "19:00 회차 제출 준비" },
       report: {
         done: [
-          "오늘 응모 12건 제출 완료 — 결제·구매 없는 무료 응모만",
-          "당첨 발표 대기 4건 등록 — 발표일 알림 설정",
-          "발표 일정 정리 — 공공누리 11/24 · 비짓부산 11/27 · 지진안전 12/4 · 경기도뉴스포털 12/18"
+          "✅ 오늘 09:00·13:00 회차 응모 제출 완료 — 제출 화면 캡처와 입력 항목 기록 유지",
+          "✅ 무료 응모만 제출 — 구매·결제·앱 설치 요구 건은 제출하지 않음",
+          "✅ 당첨 발표 일정 등록 — 발표일이 지난 건부터 결과 확인"
         ],
         doing: [
-          "다음 응모 배치 18:00 준비 — 지진안전 11월 퀴즈(마감 11/27) · 한박웃음 11월호(마감 11/30)",
-          "마감 지난 건 자동 제외 — 11/22 공공누리 · 11/23 비짓부산은 오늘 안에 제출 필요"
+          "🔄 19:00 회차 제출 준비 — 마감 임박 건 우선",
+          "🔄 발표일 지난 응모 결과 확인 중"
         ],
         wait: [
-          "대표님 승인 없는 신규 응모는 보류 — 이름·전화번호 외부 전송은 승인 후에만",
-          "18:00 배치 전 승인 확인 필요"
+          "⏳ 당첨 확인 시 본인 확인·수령 절차 — 대표님 승인 후 진행",
+          "⏳ 19:00 회차 신규 제출 건은 검수 통과 후 실행"
         ]
       },
-      comment: "오늘 12건은 문제없이 완료했습니다. 18:00 배치 전에 승인만 확인해 주세요.",
-      next: "18:00 배치 실행 → 발표일 당첨 확인 후 비서에게 보고",
+      comment: "오늘 두 회차는 문제없이 제출했습니다. 19:00 회차는 검수 통과분만 올립니다.",
+      next: "19:00 회차 제출 → 발표일 당첨 확인 → 비서에게 보고",
       rest: { spot: "b1-arcade", bubble: "오락실 한 판!" }
     },
     {
-      id: "third", name: "셋째", emoji: "👶", team: "2f", role: "3자녀 이상 혜택 조사 (전기·가스·난방)",
+      id: "third", name: "셋째", emoji: "👶", team: "2f", role: "3자녀 혜택 조사 (수원시 장안구 · 공공요금)",
       working: true,
-      work: "⚡ 전기요금 감면 조항 확인 중 · 3자녀 가구 30% 감면 대상 여부 검토",
-      workBubble: "전기요금 감면 조항 확인 중!",
-      task: "⚡ 전기·도시가스·지역난방 3종 감면 대상 확인",
-      progress: 68,
-      gate: { kind: "info", label: "거주지 시/구·주거 형태 확인" },
+      work: "⚡ 수원시 장안구 3자녀 혜택 정리 완료 · 세부 가구 조건 확인 대기",
+      workBubble: "장안구 혜택 정리 끝났어요!",
+      task: "⚡ 수원시 장안구 3자녀 혜택(상수도·공영주차·경기아이플러스) 정리 완료 — 세부 조건 확인 대기",
+      short: "장안구 혜택 정리 완료 · 조건 확인 대기",
+      progress: 76,
+      gate: { kind: "info", label: "막내 나이·난방·차량·기존 수혜 여부 확인" },
       report: {
         done: [
-          "한전 복지할인 확인 — 주택용 요금 30%, 월 16,000원 한도, 신청한 달부터 적용(소급 없음)",
-          "도시가스 요금 경감 확인 — 고시 제2025-024호 · 취사난방용 동절기 18,000원 / 4~11월 2,470원(취사용 420원)",
-          "지역난방 요금지원 확인 — 월 4,000원, 연 최대 12개월분, 1회 신청 후 자동 갱신"
+          "✅ 수원시 상수도 요금 감면 확인 — 3자녀 가구 월 5,300원 계좌 입금",
+          "✅ 수원 공영주차장 50% 감면 확인 — 다자녀 가구 등록 필요",
+          "✅ 경기아이플러스카드 혜택 확인 — 가맹점 할인 + 공공요금·교통·문화 할인",
+          "✅ 전국 공통 혜택 정리 — 전기 30%(월 16,000원 한도)·도시가스·지역난방 감면 조항"
         ],
         doing: [
-          "신청 대상 여부 확인 중 — 거주지 시/구와 주거 형태(도시가스·지역난방 여부) 미확인",
-          "정부24 일괄신청 표기(6,000원/1,650원)와 고시 금액 차이 정리 중 — 실제 적용은 고시 기준"
+          "🔄 세부 가구 조건 확인 중 — 막내 나이, 난방 형태(도시가스·지역난방), 차량 보유, 기존 수혜 여부",
+          "🔄 신청 가능 건과 준비 서류 목록 정리 중"
         ],
         wait: [
-          "💡 다자녀 전기요금 감면 신청(3자녀) — 대표님 승인 필요, 신청 즉시 적용·소급 불가",
-          "도시가스 고시 적용기한 2026.11.30 — 12월분 이후 금액은 후속 고시 확인 필요"
+          "⏳ 상수도·공영주차 감면 신청 — 신청한 달부터 적용, 소급 없음 · 대표님 확인 후 신청",
+          "⏳ 막내 나이 확인 전에는 대상 가구 확정 불가"
         ]
       },
-      comment: "세 가지 모두 신청해야 적용되고 소급이 안 됩니다. 이번 달 안에 결재해 주세요.",
-      next: "승인 후 한전ON → 가스사 → 지역난방공사 순서로 신청, 적용 확인",
+      comment: "장안구 기준으로 상수도 5,300원·공영주차 50%·경기아이플러스까지 정리했습니다. 조건 네 가지만 확인되면 바로 신청합니다.",
+      next: "조건 확인 → 신청 순서 확정 → 신청이에게 서류 전달",
       rest: { spot: "b1-karaoke", bubble: "노래방 98점!" }
     },
     {
       id: "welfare", name: "복지박사", emoji: "🏡", team: "2f", role: "지자체 혜택 발굴 · 비교",
       working: false,
-      work: "🗺️ 지자체 12곳 비교 중 · 신청 가능 4건 정리 · 보고서 작성",
-      workBubble: "지자체 12곳 비교 중!",
-      task: "🗺️ 지자체 12곳 혜택 비교 · 신청 가능 4건 정리",
-      progress: 45,
-      gate: { kind: "info", label: "거주지 시/구 확인" },
+      work: "🏡 수원시·경기도 다자녀 혜택 비교 정리 · 추가 혜택 발굴 중",
+      workBubble: "수원 혜택 비교 중!",
+      task: "🏡 수원시 장안구 기준 다자녀 혜택 비교 정리 완료 — 추가 혜택 발굴",
+      short: "수원·경기 혜택 비교 정리 완료",
+      progress: 70,
+      gate: { kind: "info", label: "막내 나이·차량 명의 확인" },
       report: {
         done: [
-          "지자체 12곳 상하수도·공영주차·체육·문화시설 감면 비교표 작성",
-          "서울 하수도 2자녀 이상 30% 확인 — 2026.3월 납기분부터, 기존 감면가구도 재신청 필수",
-          "인천 3자녀 상하수도 20% · 화성 3자녀 상수도 5,550원+하수도 7,710원 사례 확인"
+          "✅ 수원시 장안구 3자녀 혜택 정리 — 상수도 월 5,300원, 공영주차 50%, 경기아이플러스카드",
+          "✅ 전국 공통 혜택 비교표 유지 — 전기·가스·난방·고속도로·KTX·K-패스",
+          "✅ 타 지자체 사례 보관 — 서울 하수도 30%, 인천 상·하수도 20%, 화성 상수도 5,550원"
         ],
         doing: [
-          "지자체 다자녀카드 비교 중 — 서울 다둥이행복카드 · 경기 아이플러스 · 부산 가족사랑 · 인천 뉴아이모아",
-          "신청 가능 4건 서류 목록 정리 — 주민등록등본·가족관계증명서 발급 경로 확인"
+          "🔄 경기아이플러스 가맹점·공공요금 할인 범위 확인 중",
+          "🔄 수원시 체육·문화시설 감면 등 추가 혜택 확인 중"
         ],
         wait: [
-          "📋 지자체 다자녀 혜택 조사 보고 — 대표님 확인(파란불) 대기",
-          "거주지 시/구 확인 필요 — 확인 전에는 대상 지자체를 확정할 수 없습니다"
+          "⏳ 막내 나이·차량 명의 확인 — 확인 후 대상 확정",
+          "⏳ 조사 보고서 대표님 확인 대기(파란불)"
         ]
       },
-      comment: "거주지만 알려주시면 이 중 실제로 받을 수 있는 건만 추려서 바로 정리합니다.",
-      next: "거주지 확인 → 지자체별 신청 가능 건 확정 → 신청이에게 서류 전달",
+      comment: "수원시 기준으로 실제로 받을 수 있는 건만 추렸습니다. 조건이 확인되면 신청이에게 넘깁니다.",
+      next: "조건 확인 → 대상 확정 → 신청이에게 서류 전달",
       rest: { spot: "b1-lounge", bubble: "소파가 최고야…" }
     },
     {
-      id: "apply", name: "신청이", emoji: "📝", team: "2f", role: "혜택 신청 서류 작성 · 제출 (교통)",
+      id: "apply", name: "신청이", emoji: "📝", team: "2f", role: "혜택 신청 서류 작성 · 제출 (공공요금·교통)",
       working: true,
-      work: "🪪 문화누리카드 신청서 작성 중 · 셋째 아동 발급 서류 준비",
+      work: "📝 상수도·공영주차 감면 신청서 준비 중 · 서류 발급 경로 확인",
       workBubble: "신청서 작성 중!",
-      task: "🪪 고속도로·KTX·K-패스 3종 신청 준비",
-      progress: 30,
-      gate: { kind: "info", label: "본인인증·주민등록 정보 동의 필요" },
+      task: "📝 수원시 상수도·공영주차 감면 신청서 준비 — 서류·본인인증 확인",
+      short: "감면 신청서·서류 준비 중",
+      progress: 55,
+      gate: { kind: "approval", label: "실제 신청 제출 — 본인인증·대표 승인 필요" },
       report: {
         done: [
-          "고속도로 통행료 감면 요건 정리 — 3자녀 20%, 주말·공휴일, 하이패스 등록 필수, 2026.7.28~2029.8.21 한시",
-          "KTX 다자녀 행복 정리 — 3자녀 어른 운임 50%, 어른 1명 포함 3명 이상 동반, 1일 2회·월 8회",
-          "K-패스 다자녀 정보 등록 절차 확인 — 3자녀 50% 환급, '3명 이상 50% 혜택 적용 중' 표시 확인"
+          "✅ 수원시 상수도 감면 신청 경로 확인 — 주민등록등본·가족관계증명서 필요",
+          "✅ 공영주차 감면 신청 절차 확인 — 차량 등록·주차장 조례 확인",
+          "✅ K-패스 다자녀 등록·KTX 가족 등록 절차 정리"
         ],
         doing: [
-          "문화누리카드 신청서 작성 중 — 셋째 아동 발급 서류 준비",
-          "본인인증·주민등록 정보 제공 동의 문구 검토 중 — 대표님 동의 없이는 제출 불가"
+          "🔄 상수도·공영주차 신청서 초안 작성 중",
+          "🔄 정부24 서류 발급 경로 확인 중"
         ],
         wait: [
-          "3종 신청 모두 본인인증 필요 — 대표님 최종 승인 후 제출",
-          "차량 명의·하이패스 가입 여부 미확인 — 고속도로 감면의 전제 조건"
+          "⏳ 실제 신청 제출 — 본인인증이 필요해 대표님 승인 후 진행",
+          "⏳ 차량 명의·하이패스 가입 여부 미확인"
         ]
       },
-      comment: "세 건 모두 본인인증이 필요해 제가 대신 제출할 수는 없습니다. 승인해 주시면 순서대로 안내드릴게요.",
-      next: "승인 후 하이패스 등록 → K-패스 다자녀 정보 → KTX 가족 등록 순서로 진행",
+      comment: "신청서는 준비됐지만 본인인증이 필요해 제가 마지막 버튼을 누를 수 없습니다. 승인해 주시면 순서대로 안내드릴게요.",
+      next: "승인 후 상수도 → 공영주차 → K-패스 순서로 신청",
       rest: { spot: "1f-pantry", bubble: "간식바 털어가는 중~" }
     },
     {
       id: "hebrew", name: "히브리어 작가", emoji: "✍️", team: "4f", role: "4F 직속 · 티스토리 성경 히브리어 블로그 · 애드센스 운영",
       working: true,
-      work: "✍️ 초안 5편 작성 완료 · 티스토리 블로그 개설(hebrew-bible-note.tistory.com) · 등록 대기",
-      workBubble: "히브리어 블로그 쓰는 중!",
-      task: "✍️ 성경 히브리어 블로그 — 초안 5편 완료 → hebrew-bible-note.tistory.com 등록·발행 준비",
-      progress: 62,
-      gate: { kind: "approval", label: "티스토리 5편 임시저장 완료 · 발행 승인" },
+      work: "✍️ 1~5편 공개 · 애드센스 검토 중 · 06~10편 순차 발행 (09:30·13:30·19:30)",
+      workBubble: "하루 3회 자동 발행·점검 중!",
+      task: "✍️ 성경 히브리어 블로그 — 1~5편 공개 발행 완료, 애드센스 검토 중, 06~10편 순차 발행",
+      short: "1~5편 공개 · 애드센스 검토 중",
+      progress: 90,
+      gate: { kind: "approval", label: "애드센스 세금 정보(W-8BEN)·전화번호 등록 승인" },
       report: {
         done: [
-          "✅ 초안 5편 작성 완료 — ① 알파벳 입문 ② 니쿠드 ③ 핵심 단어 5선 ④ 창세기 1:1 ⑤ 무료 독학 사이트",
-          "✅ 편당 약 2,400~2,850자 · 카테고리 4종 정리(히브리어 기초 · 원어 단어장 · 구약 본문 읽기 · 학습 도구)",
-          "✅ 블로그 이름 후보 5개 · 카테고리 구조 · 발행 순서 · 애드센스 사전 점검 체크리스트 정리",
-          "✅ 보고 모달에서 초안 5편 바로 읽기 · 본문 복사 지원 (티스토리 붙여넣기용)",
-          "✅ 티스토리 블로그 개설 완료 — hebrew-bible-note.tistory.com (개인정보 없는 학습 블로그)"
+          "✅ 1~5편 공개 발행 완료 — hebrew-bible-note.tistory.com/1 ~ /5 (팩트체크 후 공개, HTTP 200 확인)",
+          "✅ 소개 · 개인정보처리방침 페이지 공개 — /pages/about · /pages/privacy, 상단 메뉴 연결",
+          "✅ 애드센스 계정 연결 — ca-pub-2340462858479711 · 소유권 확인 · 전체 자동광고 ON · 검토 요청 제출",
+          "✅ 하루 3회(09:30·13:30·19:30) 자동 발행·점검 스케줄 가동 중",
+          "✅ 06~10편 초안 준비 완료 — 다게쉬·쉐와, 시편 23:1, 핵심 단어 확장, 동사 입문, 현대 히브리어 비교"
         ],
         doing: [
-          "🔄 발행용 글 5편 다듬는 중 — 블로그 카테고리 구조에 맞춰 제목·태그·순서 점검",
-          "🔄 5편 등록용 본문 정리 중 — 파일 맨 위 메타 블록 제외, 제목·카테고리·태그 순서 확인"
+          "🔄 애드센스 심사 결과 대기 — 승인 전에는 광고가 노출되지 않습니다(보통 수일~2주)",
+          "🔄 06~10편 순차 발행 중 — 회차당 1~2편, 발행 후 notes.md에 기록"
         ],
         wait: [
-          "⏳ 초안 5편 티스토리 등록·발행 — 대표님(삼촌) 최종 검토·승인 대기",
-          "⏳ 애드센스 신청은 발행 후 — 승인 전 점검 항목(개인정보처리방침·문의·카테고리) 확인 필요"
+          "⏳ 애드센스 세금 정보(W-8BEN)·전화번호 등록 — 금융·개인정보라 대표님 승인 후 진행",
+          "⏳ 티스토리 연동 수익 배분율 0% 표기 — 실제 정산 구조 대표님 확인 필요"
         ]
       },
-      comment: "5편 모두 로컬 초안 상태로만 있고 아직 어디에도 올리지 않았습니다. 발행은 삼촌 확인 후에 진행합니다.",
-      next: "승인 후 ①→⑤ 순서로 hebrew-bible-note.tistory.com 에 등록·발행 → 애드센스 신청 순서로 진행",
+      comment: "1~5편은 공개됐고 소개·개인정보처리방침도 올라가 있습니다. 남은 건 구글 심사 결과와 세금 정보 입력입니다.",
+      next: "심사 승인 확인 → W-8BEN·전화번호 등록 → 06~10편 순차 발행 계속",
       rest: { spot: "1f-pantry", bubble: "쉬면서 다음 글 구상 중~" },
       restSpots: ["1f-pantry", "b1-lounge", "b1-arcade"]
     }
@@ -1264,42 +1373,32 @@ window.__BLOG_POSTS = [{"id":"01","no":"①","file":"01-성경-히브리어-입�
 
   var SEED_APPROVALS = [
     {
-      id: "a1", level: "red", floor: "3F", title: "✈️ 항공권 경품 응모 — 제주 왕복 2인",
-      detail: "조건 : 이름·휴대폰만 입력 · 마감 오늘 18:00 · 당첨 시 본인 확인 필요",
-      note: "대형 경품 — 대표님 승인 필요"
+      id: "a1", level: "red", floor: "4F", title: "💰 애드센스 세금 정보(W-8BEN)·전화번호 등록",
+      detail: "미국 세금 정보 미입력 · 결제 프로필 전화번호 비어 있음 · 지급 전 필요",
+      note: "금융·개인정보 — 대표님 승인 필요"
     },
     {
-      id: "a2", level: "red", floor: "3F", title: "🚗 자동차 리스권 이벤트 응모 — 1년",
-      detail: "조건 : 이름·휴대폰 · 마감 11/27 · 응모 1회 제한",
-      note: "대형 경품 — 대표님 승인 필요"
-    },
-    {
-      id: "a3", level: "red", floor: "2F", title: "💡 다자녀 전기요금 감면 신청 (3자녀)",
-      detail: "한전 신청 · 월 최대 30% 감면 · 셋째 명의 · 승인 즉시 신청 진행",
+      id: "a2", level: "red", floor: "2F", title: "🏛️ 수원시 상수도·공영주차 감면 신청 (3자녀)",
+      detail: "상수도 월 5,300원 계좌 입금 · 공영주차 50% · 신청한 달부터 적용(소급 없음)",
       note: "실제 신청 실행 — 대표님 승인 필요"
     },
     {
-      id: "a4", level: "blue", floor: "3F", title: "🎁 편의점 5천원 상품권 응모 8건",
-      detail: "조건 : 이름·전화번호만 · 개인정보 과다 요구 없음 · 비용 없음",
+      id: "a3", level: "blue", floor: "2F", title: "🍼 2F 세부 가구 조건 4가지 확인",
+      detail: "막내 나이 · 난방 형태(도시가스·지역난방) · 차량 명의 · 기존 수혜 여부",
       note: ""
     },
     {
-      id: "a5", level: "blue", floor: "2F", title: "📋 지자체 다자녀 혜택 조사 보고",
-      detail: "12개 지자체 비교 · 신청 가능 4건 정리 · 서류 목록 첨부",
+      id: "a4", level: "blue", floor: "4F", title: "✍️ 히브리어 06~10편 자동 발행 현황 확인",
+      detail: "하루 3회(09:30·13:30·19:30) 순차 발행 중 · 회차별 결과는 notes.md에 기록",
       note: ""
-    },
-    {
-      id: "a6", level: "blue", floor: "4F", title: "✍️ 성경 히브리어 블로그 초안 5편 티스토리 등록·발행 검토",
-      detail: "초안 5편(알파벳 입문·니쿠드·핵심 단어 5선·창세기 1:1·무료 독학 사이트) · 편당 한글 2,400~2,850자 · 블로그 hebrew-bible-note.tistory.com 개설 완료 · 보고서에서 바로 읽기 가능",
-      note: "발행은 외부 공개 — 대표님 검토 후 승인된 편만 등록"
     }
   ];
 
   var SEED_LOG = [
-    { tag: "4F", cls: "p", text: "히브리어 작가 — 초안 5편 작성 완료(알파벳·니쿠드·단어 5선·창세기 1:1·무료 사이트). 블로그 개설(hebrew-bible-note.tistory.com) · 등록 진행 중, 발행은 대표님 검토 후." },
-    { tag: "비서", cls: "b", text: "2F·3F·4F 현황 취합 완료 — 근무 5명 / 휴식 2명. 대기 승인 6건 정리해 두었습니다." },
-    { tag: "3F", cls: "", text: "경품팀 — 항공권·자동차 대형 경품 2건은 대표님 승인 대기 중입니다. 개인정보 과다 요구 5건은 제외했습니다." },
-    { tag: "2F", cls: "p", text: "다자녀팀 — 3자녀 기준 혜택 4건 신청 가능 확인. 전기요금 감면은 승인 후 신청하겠습니다." }
+    { tag: "4F", cls: "p", text: "히브리어 작가 — 1~5편 공개 발행 완료(/1~/5) · 소개·개인정보처리방침 공개 · 애드센스 검토 요청 제출(검토 중) · 하루 3회 자동 발행 스케줄 가동." },
+    { tag: "비서", cls: "b", text: "3F 자동 응모(09:00·13:00·19:00) · 2F 수원시 장안구 혜택 정리 · 4F 블로그 운영 현황을 한 번에 취합했습니다." },
+    { tag: "3F", cls: "", text: "경품팀 — 이름·전화·주소까지만 자동 입력. 오늘 09:00·13:00 회차 완료, 19:00 회차 준비 중입니다." },
+    { tag: "2F", cls: "p", text: "다자녀팀 — 수원시 상수도 5,300원·공영주차 50%·경기아이플러스 정리 완료. 막내 나이 등 조건 확인 대기." }
   ];
 
   var staff = [];
@@ -1517,6 +1616,7 @@ window.__BLOG_POSTS = [{"id":"01","no":"①","file":"01-성경-히브리어-입�
     renderApprovals();
     renderDecisions();
     renderBriefSummary();
+    renderGlance();
 
     if (status === "ok") {
       addLog("비서", "b", "✅ 승인 완료 — " + a.floor + " · " + a.title + " → 즉시 실행 지시");
@@ -1541,8 +1641,8 @@ window.__BLOG_POSTS = [{"id":"01","no":"①","file":"01-성경-히브리어-입�
         'onerror="this.closest(\'.fig-wrap\').classList.add(\'imgfail\')">' +
       '<span class="fig-fb">' + (emoji || "") + '</span></span>';
   }
-  function faceHtml(id) {
-    return '<img class="gl-face" src="' + charSrc(id) + '" alt="" loading="lazy" decoding="async">';
+  function faceHtml(id, cls) {
+    return '<img class="' + (cls || "gl-face") + '" src="' + charSrc(id) + '" alt="" loading="lazy" decoding="async">';
   }
 
   /* ---------------- staff rendering ---------------- */
@@ -1678,6 +1778,7 @@ window.__BLOG_POSTS = [{"id":"01","no":"①","file":"01-성경-히브리어-입�
       '<span class="r">휴식 ' + rest + '명</span>' +
       (ap ? '<span class="a">승인 대기 ' + ap + '명</span>' : "") +
       (inf ? '<span class="i">정보 대기 ' + inf + '명</span>' : "");
+    renderTopStrip();
   }
 
   function toggleStaff(id) {
@@ -1870,21 +1971,21 @@ window.__BLOG_POSTS = [{"id":"01","no":"①","file":"01-성경-히브리어-입�
       groups: [
         { key: "done", label: "✅ 완료", items: [
           "3F 경품·이벤트팀 근무 " + workCount(t3) + "/3명 · 2F 다자녀 혜택팀 근무 " + workCount(t2) + "/3명 현황 취합",
-          "4F 히브리어 블로그 초안 5편 완료 확인 — hebrew-bible-note.tistory.com 등록·발행 전 대표님 검토 대기",
+          "4F 히브리어 블로그 1~5편 공개 발행 확인 — /1~/5 · 소개·개인정보처리방침 공개 · 애드센스 검토 중",
           "1F·B1 휴식 " + rest + "명 위치 확인 — 탕비실 " + restingAt("1f-pantry").length + " · 휴게실 " + restingAt("b1-lounge").length + " · 오락실 " + restingAt("b1-arcade").length + " · 노래방 " + restingAt("b1-karaoke").length,
           "개인정보 과다 요구 5건 사전 차단 — 주민번호·계좌·카드 요구 응모는 올리지 않음"
         ] },
         { key: "doing", label: "🔄 진행 중", items: [
           "미결 승인 " + tot + "건 우선순위 정리 — 빨간불 " + r + "건(대형 경품·실제 신청) / 파란불 " + b + "건(일반 확인·4F 블로그 발행 검토)",
-          "오늘 18:00 마감 항공권 건 — 대표님 결재 후 즉시 3F로 실행 지시 예정"
+          "19:00 3F 자동 응모 회차 — 검수 통과분만 제출하도록 실행 지시 예정"
         ] },
         { key: "wait", label: "⏳ 승인·확인 대기", items: [
           "대표님 최종 결재 " + tot + "건 대기 — 빨간불 " + r + " · 파란불 " + b,
-          "2F 신청 확정 전 필요한 확인 정보 5가지 — 거주지 시/구 · 자녀 수·생년월일 · 주거 형태 · 차량 명의 · 대학생 자녀 유무"
+          "2F 신청 확정 전 필요한 확인 4가지 — 막내 나이 · 난방 형태 · 차량 명의 · 기존 수혜 여부"
         ] },
       ],
       comment: tot
-        ? "빨간불 " + r + "건이 오늘 18:00 마감입니다. 먼저 결재해 주시면 나머지는 확인만 하면 됩니다."
+        ? "빨간불 " + r + "건(애드센스 세금 정보·2F 실제 신청)이 남아 있습니다. 먼저 결재해 주시면 나머지는 확인만 하면 됩니다."
         : "미결 건이 없습니다. 오늘 결재분은 팀에 전부 전달했습니다.",
       next: tot ? "결재 결과를 3F·2F·4F 팀에 즉시 전달 → 실행 착수" : "새 보고가 들어오면 정리해서 다시 올립니다"
     };
@@ -1914,15 +2015,15 @@ window.__BLOG_POSTS = [{"id":"01","no":"①","file":"01-성경-히브리어-입�
         ] },
         { key: "doing", label: "🔄 진행 중", items: [
           "미결 " + tot + "건 검토 — 빨간불 " + r + "건(대형 경품·실제 신청) · 파란불 " + b + "건(일반 확인)",
-          "비서가 정리한 우선순위 확인 중 — 빨간불 1순위는 오늘 18:00 마감된 항공권 건"
+          "비서가 정리한 우선순위 확인 중 — 빨간불 1순위는 애드센스 세금 정보와 2F 실제 신청 건"
         ] },
         { key: "wait", label: "⏳ 승인·확인 대기", items: [
           "대표님 결재 대기 " + tot + "건" + (r ? " — 빨간불 " + r + "건은 결재 없이는 실행되지 않습니다" : ""),
-          "2F 신청 확정 전 필요한 확인 정보 5건 — 거주지·자녀 정보·주거 형태·차량 명의·대학생 자녀"
+          "2F 신청 확정 전 필요한 확인 4건 — 막내 나이·난방 형태·차량 명의·기존 수혜 여부"
         ] },
       ],
       comment: tot
-        ? "빨간불 " + r + "건이 오늘 마감입니다. [승인]/[불허]만 눌러주시면 비서가 팀에 바로 내려보냅니다."
+        ? "빨간불 " + r + "건이 남아 있습니다. [승인]/[불허]만 눌러주시면 비서가 팀에 바로 내려보냅니다."
         : "오늘 결재하실 건이 없습니다. 팀은 승인된 범위 안에서 계속 진행합니다.",
       next: tot ? "미결 " + tot + "건 결재 → 비서가 팀별 실행 지시" : "새 보고가 도착하면 비서가 정리해 올립니다"
     };
@@ -1999,7 +2100,7 @@ window.__BLOG_POSTS = [{"id":"01","no":"①","file":"01-성경-히브리어-입�
           '<div class="pl-meta"><span class="pl-no">' + esc(p.no) + '</span>' +
             '<span class="pl-cat">' + esc(p.category) + '</span>' +
             '<span>한글 ' + p.chars.toLocaleString("ko-KR") + '자</span>' +
-            '<span>발행 전 초안</span></div>' +
+            '<span>공개 발행 완료</span></div>' +
           '<div class="pl-title">' + esc(p.title) + '</div>' +
           '<div class="pl-desc">' + esc(p.desc) + '</div>' +
         '</div>' +
@@ -2008,7 +2109,7 @@ window.__BLOG_POSTS = [{"id":"01","no":"①","file":"01-성경-히브리어-입�
     }).join("");
     return '<section class="dr-sec blog">' +
       '<div class="blog-head">📚 성경 히브리어 블로그 글 바로 보기 (5편)<span class="n">' + BLOG_POSTS.length + '편</span></div>' +
-      '<div class="blog-sub">티스토리에 올리기 전 초안 그대로 — 앱 안에서 바로 읽고 본문을 복사할 수 있습니다.</div>' +
+      '<div class="blog-sub">1~5편은 hebrew-bible-note.tistory.com 에 공개 발행 완료(/1~/5) — 앱 안에서 바로 읽고 본문을 복사할 수 있습니다. 06~10편은 자동 운영이 순차 발행합니다.</div>' +
       tistoryBarHtml() +
       '<ol class="post-list">' + items + '</ol>' +
     '</section>';
@@ -2033,7 +2134,7 @@ window.__BLOG_POSTS = [{"id":"01","no":"①","file":"01-성경-히브리어-입�
           '<h2 id="repName" style="margin-top:7px">히브리어 작가 · 블로그 글 ' + esc(p.no) + '</h2>' +
           '<div class="dr-role">4F 직속 · 티스토리 성경 히브리어 블로그 · 애드센스 운영</div>' +
           '<div class="dr-chips"><span class="floor-chip">4F</span>' +
-            '<span class="chip work"><span class="dot"></span>발행 전 초안</span></div>' +
+            '<span class="chip work"><span class="dot"></span>공개 발행 완료</span></div>' +
         '</div>' +
         '<button type="button" class="dr-x" data-modal-close aria-label="보고 닫기">✕</button>' +
       '</div>' +
@@ -2041,7 +2142,7 @@ window.__BLOG_POSTS = [{"id":"01","no":"①","file":"01-성경-히브리어-입�
         '<article class="pr-body">' +
           '<h1 class="pr-title">' + esc(p.title) + '</h1>' +
           '<div class="pr-meta"><span class="d">✍️ 히브리어 작가</span><span>' + esc(p.category) + '</span>' +
-            '<span>한글 ' + p.chars.toLocaleString("ko-KR") + '자</span><span>티스토리 발행 전 초안</span></div>' +
+            '<span>한글 ' + p.chars.toLocaleString("ko-KR") + '자</span><span>티스토리 공개 발행 완료</span></div>' +
           p.html +
           (p.tags && p.tags.length
             ? '<div class="pr-tags"><span>🏷 태그</span>' + p.tags.map(function (t) { return '<span class="tg">' + esc(t) + '</span>'; }).join("") + '</div>'
@@ -2163,6 +2264,7 @@ window.__BLOG_POSTS = [{"id":"01","no":"①","file":"01-성경-히브리어-입�
         '</div>' +
         '<button type="button" class="dr-x" data-modal-close aria-label="보고 닫기">✕</button>' +
       '</div>' +
+      drLinksHtml() +
       '<div class="dr-body">' +
         '<section class="dr-sec">' +
           '<h3>현재 담당 업무 &amp; 진행률</h3>' +
@@ -2239,9 +2341,9 @@ window.__BLOG_POSTS = [{"id":"01","no":"①","file":"01-성경-히브리어-입�
       ["🕐 기준 시각", nowLabel() + " KST"],
       ["👑 4F 대표실", "삼촌 보고 받는 중 · 미결 " + (b + r) + "건"],
       ["💼 4F 전담 비서", "3F·2F 현황 + 4F 블로그 진행 브리핑 중"],
-      ["✍️ 4F 히브리어 블로그", "초안 5편 완료 · 블로그 개설(hebrew-bible-note.tistory.com) · 발행 승인 대기"],
-      ["🎁 3F 경품·이벤트팀", "근무 " + work3 + " / 3명 · 대형 경품 승인 대기 " + r + "건"],
-      ["🍼 2F 다자녀 혜택팀", "근무 " + work2 + " / 3명 · 신청 가능 4건"],
+      ["✍️ 4F 히브리어 블로그", "1~5편 공개 · 소개/개인정보처리방침 공개 · 애드센스 검토 중 · 06~10편 순차 자동 발행"],
+      ["🎁 3F 경품·이벤트팀", "자동 응모 09:00·13:00 완료 · 19:00 회차 준비 · 근무 " + work3 + " / 3명"],
+      ["🍼 2F 다자녀 혜택팀", "수원시 장안구 3자녀 혜택 정리 완료 · 조건 확인 대기 · 근무 " + work2 + " / 3명"],
       ["☕ 1F 탕비실", restingAt("1f-pantry").length + "명 휴식 중"],
       ["🎉 B1 복지층", restingAt("b1-lounge").length + "명 휴게실 · " + restingAt("b1-arcade").length + "명 오락실 · " + restingAt("b1-karaoke").length + "명 노래방"]
     ];
@@ -2286,6 +2388,74 @@ window.__BLOG_POSTS = [{"id":"01","no":"①","file":"01-성경-히브리어-입�
       renderDecisions();
       renderLog();
     }
+  }
+
+  /* ---------------- 사무실 맨 위 · 전 직원 실시간 업무 보드 ----------------
+     삼촌(대표)·버서·히브리어 작가·3F·2F 전원을 이미지·이름·근무/휴식·현재 업무·진행률로 보여 주고,
+     항목을 누르면 그 직원의 업무 진행 보고 모달이 열립니다. */
+  function stripItem(s) {
+    var fi = FLOOR_INFO[s.team] || DEFAULT_FLOOR;
+    var pct = Math.max(0, Math.min(100, s.progress || 0));
+    var place = (s.rest && SPOTS[s.rest.spot]) || "1F 탕비실";
+    var status = esc(s.working ? "근무 중" : "휴식 중 · " + place);
+    return '<button type="button" class="ts-item' + (s.working ? "" : " resting") + '" data-report="' + esc(s.id) + '" ' +
+        'aria-label="' + esc(s.name + " 업무 진행 보고 열기 — " + (s.working ? "근무 중" : "휴식 중 · " + place)) + '">' +
+      '<img class="ts-face" src="' + charSrc(s.id) + '" alt="" loading="lazy" decoding="async">' +
+      '<span class="ts-main">' +
+        '<span class="ts-l1">' +
+          '<span class="ts-n">' + esc(s.name) + '</span>' +
+          '<span class="ts-fl ' + esc(s.team) + '">' + esc(fi.num) + '</span>' +
+          '<span class="ts-right"><span class="ts-dot" aria-hidden="true"></span>' +
+            '<span class="ts-st">' + (s.working ? "근무" : "휴식") + '</span>' +
+            '<span class="ts-pct">' + pct + '%</span></span>' +
+        '</span>' +
+        '<span class="ts-task" title="' + status + '">' + esc(s.short || s.task) + '</span>' +
+      '</span>' +
+      '<span class="ts-bar" aria-hidden="true"><span class="' + (s.working ? "" : "paused") + '" style="width:' + pct + '%"></span></span>' +
+    '</button>';
+  }
+
+  function renderTopStrip() {
+    var list = $("#tsList"), sum = $("#tsSum");
+    if (!list) return;
+    var tot = pending().length;
+    var head = [
+      { id: "owner", name: "삼촌", team: "4f", working: true, progress: ownerModel().progress,
+        short: "최종 승인 결재 · 미결 " + tot + "건" },
+      { id: "secretary", name: "비서", team: "4f", working: true, progress: 100,
+        short: "2F·3F·4F 현황 취합 · 브리핑 중" }
+    ];
+    var items = head.concat(staff.slice().sort(function (a, b) { return floorRank(a) - floorRank(b); }));
+    list.innerHTML = items.map(stripItem).join("");
+    if (sum) {
+      var w = items.filter(function (s) { return s.working; }).length;
+      sum.innerHTML =
+        '<span class="w">근무 ' + w + '명</span>' +
+        '<span class="r">휴식 ' + (items.length - w) + '명</span>' +
+        (tot ? '<span class="a">승인·확인 ' + tot + '건</span>' : "");
+    }
+  }
+
+  /* ---------------- 보고 모달 안 바로가기 ---------------- */
+  function shortcutsFor(id) {
+    if (id === "hebrew") return [
+      { icon: "📖", label: "히브리어 블로그", href: "https://hebrew-bible-note.tistory.com" },
+      { icon: "⚙️", label: "글쓰기·관리", href: "https://hebrew-bible-note.tistory.com/manage" },
+      { icon: "💰", label: "구글 애드센스", href: "https://adsense.google.com" }
+    ];
+    var s = staff.filter(function (x) { return x.id === id; })[0];
+    if (s && s.team === "2f") return [
+      { icon: "🏛️", label: "수원시 다자녀", href: "https://www.suwon.go.kr" }
+    ];
+    return [];
+  }
+
+  function drLinksHtml() {
+    var list = shortcutsFor(openId);
+    if (!list.length) return "";
+    return '<div class="dr-links" aria-label="바로가기">' + list.map(function (l) {
+      return '<a href="' + esc(l.href) + '" target="_blank" rel="noopener">' + l.icon + " " + esc(l.label) + ' ↗</a>';
+    }).join("") + '</div>';
   }
 
   /* ---------------- events ---------------- */
