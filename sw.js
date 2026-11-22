@@ -5,13 +5,32 @@
  */
 "use strict";
 
-var CACHE_NAME = "ai-company-v7";
+var CACHE_NAME = "ai-company-v8";
 var PRECACHE = [
   "./",
   "./index.html",
   "./manifest.webmanifest",
   "./icon-192.png",
-  "./icon-512.png"
+  "./icon-512.png",
+  "./assets/chars/ceo.webp",
+  "./assets/chars/secretary.webp",
+  "./assets/chars/hebrew.webp",
+  "./assets/chars/ppop.webp",
+  "./assets/chars/lucky.webp",
+  "./assets/chars/entry.webp",
+  "./assets/chars/third.webp",
+  "./assets/chars/bokji.webp",
+  "./assets/chars/apply.webp",
+  "./assets/bg/floor-4f.webp",
+  "./assets/bg/floor-3f.webp",
+  "./assets/bg/floor-2f.webp",
+  "./assets/bg/floor-1f.webp",
+  "./assets/bg/floor-b1.webp",
+  "./assets/bg/floor-4f-sm.webp",
+  "./assets/bg/floor-3f-sm.webp",
+  "./assets/bg/floor-2f-sm.webp",
+  "./assets/bg/floor-1f-sm.webp",
+  "./assets/bg/floor-b1-sm.webp"
 ];
 
 self.addEventListener("install", function (event) {

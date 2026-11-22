@@ -153,14 +153,19 @@
   .hint .k{color:#cbd5e1; background:rgba(148,163,184,.12); border:1px solid var(--line); border-radius:6px; padding:1px 6px; font-weight:700}
 
   /* ---------- floors ---------- */
-  .floor{margin-top:16px; border:1px solid var(--line); border-radius:16px; overflow:hidden; background:linear-gradient(180deg, rgba(255,255,255,.018), rgba(255,255,255,0)); box-shadow:0 12px 32px rgba(0,0,0,.22)}
-  .floor-head{display:flex; align-items:center; gap:10px; padding:10px 12px; background:linear-gradient(90deg, var(--fl-soft), transparent 72%); border-bottom:1px solid var(--line); flex-wrap:wrap}
+  .floor{margin-top:16px; border:1px solid var(--line); border-radius:16px; overflow:hidden;
+    background-color:#0a1220;
+    background-image:linear-gradient(180deg, rgba(3,8,18,.50), rgba(3,8,18,.88)), var(--bg, none);
+    background-size:cover, cover; background-position:center top, center top; background-repeat:no-repeat;
+    box-shadow:0 16px 40px rgba(0,0,0,.34)}
+  .floor-head{display:flex; align-items:center; gap:10px; padding:10px 12px; background-color:rgba(5,11,22,.74);
+    background-image:linear-gradient(90deg, var(--fl-soft), rgba(5,11,22,.32) 72%); border-bottom:1px solid var(--line); flex-wrap:wrap}
   .floor-num{font-family:var(--mono); font-weight:800; font-size:13px; color:#08111f; background:var(--fl); padding:3px 9px; border-radius:8px; box-shadow:0 0 20px var(--fl-soft); letter-spacing:.02em}
   .floor-name{font-size:15px; font-weight:800; letter-spacing:-.2px; display:flex; align-items:center; gap:7px; flex-wrap:wrap}
   .floor-name .em{font-size:15px}
   .floor-meta{margin-left:auto; display:flex; align-items:center; gap:8px; font-size:11px; color:var(--muted); font-weight:700}
   .floor-meta .stat{padding:2px 8px; border-radius:999px; border:1px solid var(--line2); background:rgba(6,12,26,.6); font-variant-numeric:tabular-nums}
-  .floor-body{padding:12px}
+  .floor-body{padding:12px; background:linear-gradient(180deg, rgba(4,10,20,.26), rgba(4,10,20,.46))}
   .grid-3{display:grid; grid-template-columns:repeat(auto-fit, minmax(228px, 1fr)); gap:10px}
   .suite{display:grid; grid-template-columns:1.35fr 1fr; gap:10px}
   .suite.suite4{grid-template-columns:1.12fr 1fr 1fr}
@@ -211,6 +216,25 @@
   .desk.off .laptop .base{opacity:.4}
   .desk.off .plank{opacity:.55}
   .card.desk-card.resting .scene{padding-top:30px}
+
+  /* ---------- 3D 치비 캐릭터 (assets/chars) ---------- */
+  .fig-wrap{position:relative; display:inline-flex; align-items:flex-end; justify-content:center; line-height:0}
+  .fig{height:88px; width:auto; max-width:132px; display:block; object-fit:contain;
+    filter:drop-shadow(0 9px 12px rgba(2,6,16,.6)); animation:figbob 6s ease-in-out infinite}
+  @keyframes figbob{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
+  .fig.xl{height:108px; max-width:170px}
+  .fig.lg{height:98px; max-width:150px}
+  .guest .fig{height:64px; max-width:104px}
+  .fig-fb{display:none; font-size:30px; line-height:1}
+  .fig-wrap.imgfail .fig{display:none}
+  .fig-wrap.imgfail .fig-fb{display:block}
+  .card.desk-card .desk{margin-top:-8px}
+  .gl-face{width:22px; height:22px; border-radius:7px; object-fit:cover; object-position:50% 4%;
+    background:radial-gradient(circle at 35% 25%, #24344f, #0d1728); border:1px solid rgba(148,163,184,.32); display:block; flex:0 0 auto}
+  .dr-ava{position:relative; overflow:hidden}
+  .dr-face{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:50% 4%; border-radius:50%}
+  .dr-fb{position:relative; z-index:0}
+  @media (prefers-reduced-motion: reduce){ .fig{animation:none} }
   .vacant-note{margin-top:4px; font-family:inherit; font-size:9.5px; font-weight:800; color:#a9bcd6; background:rgba(2,6,16,.75); border:1px dashed rgba(148,163,184,.42); padding:2px 7px; border-radius:6px; cursor:pointer; white-space:nowrap; transition:all .14s ease}
   .vacant-note:hover{color:#e6f6ff; border-color:rgba(125,211,252,.6); background:rgba(56,189,248,.12)}
   .vacant-note:focus-visible{outline:2px solid #7dd3fc; outline-offset:2px}
@@ -319,7 +343,7 @@
   .room-head .cnt{margin-left:auto; font-family:var(--mono); font-size:10.5px; color:var(--muted); border:1px solid var(--line2); border-radius:999px; padding:1px 7px}
   .room-desc{font-size:11px; color:var(--dim); margin-bottom:8px}
   .props{display:flex; flex-wrap:wrap; gap:6px}
-  .prop{display:inline-flex; align-items:center; gap:5px; font-size:11px; color:#cbd5e1; background:rgba(148,163,184,.08); border:1px solid var(--line); border-radius:8px; padding:4px 8px}
+  .prop{display:inline-flex; align-items:center; gap:5px; font-size:11px; color:#cbd5e1; background:rgba(6,14,26,.62); border:1px solid var(--line); border-radius:8px; padding:4px 8px}
   .prop .e{font-size:13px}
   .guests{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; align-items:flex-end}
   .guest{display:flex; flex-direction:column; align-items:center; gap:4px; padding:8px 10px 8px; border-radius:12px; border:1px solid rgba(245,185,66,.22); background:rgba(245,185,66,.05); min-width:104px; animation:pop .32s ease}
@@ -331,7 +355,7 @@
   .mini{border:1px solid rgba(56,189,248,.35); background:rgba(56,189,248,.1); color:#93e3ff; font-family:inherit; font-size:10.5px; font-weight:800; padding:3px 8px; border-radius:7px; cursor:pointer}
   .mini:hover{background:rgba(56,189,248,.2)}
   .mini:focus-visible{outline:2px solid #7dd3fc; outline-offset:2px}
-  .empty{font-size:11.5px; color:var(--dim); border:1px dashed rgba(148,163,184,.24); border-radius:10px; padding:14px 10px; text-align:center; margin-top:10px}
+  .empty{font-size:11.5px; color:#a9b8ce; border:1px dashed rgba(148,163,184,.24); border-radius:10px; padding:14px 10px; text-align:center; margin-top:10px; background:rgba(4,10,20,.55)}
   .lobby{display:grid; grid-template-columns:1fr 1.5fr; gap:10px}
   .b1{display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:10px}
   .zone{border-color:rgba(244,114,182,.22); background:linear-gradient(180deg, rgba(244,114,182,.07), rgba(11,19,34,.98) 45%); min-height:168px}
@@ -594,6 +618,13 @@
     .ava{width:42px; height:42px; font-size:23px; border-width:1.5px}
     .ava.xl{width:54px; height:54px; font-size:29px}
     .ava.empty{font-size:20px}
+    .fig{height:64px; max-width:100px}
+    .fig.xl{height:80px; max-width:124px}
+    .fig.lg{height:72px; max-width:112px}
+    .guest .fig{height:50px; max-width:80px}
+    .gl-face{width:19px; height:19px; border-radius:6px}
+    .card.desk-card .desk{margin-top:-6px}
+    .floor{background-image:linear-gradient(180deg, rgba(3,8,18,.44), rgba(3,8,18,.88)), var(--bg-sm, var(--bg, none))}
     .tag{font-size:9.2px; padding:1px 6px}
     .laptop{width:40px; height:26px}
     .laptop .scr{left:3px; width:34px; height:20px}
@@ -758,7 +789,7 @@
   <main id="paneBuilding" class="pane" role="tabpanel" aria-labelledby="tabBuilding">
 
     <!-- 4F -->
-    <section class="floor" style="--fl:#f5b942; --fl-soft:rgba(245,185,66,.16); --fl-line:rgba(245,185,66,.35)">
+    <section class="floor" style="--fl:#f5b942; --fl-soft:rgba(245,185,66,.16); --fl-line:rgba(245,185,66,.35); --bg:url('assets/bg/floor-4f.webp'); --bg-sm:url('assets/bg/floor-4f-sm.webp')">
       <div class="floor-head">
         <span class="floor-num">4F</span>
         <span class="floor-name"><span class="em">👑</span> 대표실 · 오너 + 전담 비서 + 히브리어 블로그</span>
@@ -774,7 +805,7 @@
             <div class="scene">
               <div class="bubble">전체 보고 받는 중!</div>
               <div class="person">
-                <div class="ava xl on" aria-hidden="true">👑</div>
+                <span class="fig-wrap" aria-hidden="true"><img class="fig xl" src="assets/chars/ceo.webp" alt="" decoding="async" onerror="this.closest('.fig-wrap').classList.add('imgfail')"><span class="fig-fb">👑</span></span>
                 <div class="tag gold">👑 삼촌 · 대표</div>
               </div>
               <div class="desk">
@@ -794,7 +825,7 @@
             <div class="scene" style="min-height:150px">
               <div class="bubble">모든 상황 실시간 브리핑 중!</div>
               <div class="person">
-                <div class="ava on" aria-hidden="true">💼</div>
+                <span class="fig-wrap" aria-hidden="true"><img class="fig lg" src="assets/chars/secretary.webp" alt="" decoding="async" onerror="this.closest('.fig-wrap').classList.add('imgfail')"><span class="fig-fb">💼</span></span>
                 <div class="tag">💼 비서</div>
               </div>
               <div class="desk">
@@ -818,7 +849,7 @@
     </section>
 
     <!-- 3F -->
-    <section class="floor" style="--fl:#38bdf8; --fl-soft:rgba(56,189,248,.16); --fl-line:rgba(56,189,248,.35)">
+    <section class="floor" style="--fl:#38bdf8; --fl-soft:rgba(56,189,248,.16); --fl-line:rgba(56,189,248,.35); --bg:url('assets/bg/floor-3f.webp'); --bg-sm:url('assets/bg/floor-3f-sm.webp')">
       <div class="floor-head">
         <span class="floor-num">3F</span>
         <span class="floor-name"><span class="em">🎁</span> 경품 · 이벤트 응모팀</span>
@@ -831,7 +862,7 @@
     </section>
 
     <!-- 2F -->
-    <section class="floor" style="--fl:#a78bfa; --fl-soft:rgba(167,139,250,.16); --fl-line:rgba(167,139,250,.35)">
+    <section class="floor" style="--fl:#a78bfa; --fl-soft:rgba(167,139,250,.16); --fl-line:rgba(167,139,250,.35); --bg:url('assets/bg/floor-2f.webp'); --bg-sm:url('assets/bg/floor-2f-sm.webp')">
       <div class="floor-head">
         <span class="floor-num">2F</span>
         <span class="floor-name"><span class="em">🍼</span> 대한민국 다자녀 혜택팀 <span class="pill">3자녀 기준</span></span>
@@ -844,7 +875,7 @@
     </section>
 
     <!-- 1F -->
-    <section class="floor" style="--fl:#34d399; --fl-soft:rgba(52,211,153,.16); --fl-line:rgba(52,211,153,.35)">
+    <section class="floor" style="--fl:#34d399; --fl-soft:rgba(52,211,153,.16); --fl-line:rgba(52,211,153,.35); --bg:url('assets/bg/floor-1f.webp'); --bg-sm:url('assets/bg/floor-1f-sm.webp')">
       <div class="floor-head">
         <span class="floor-num">1F</span>
         <span class="floor-name"><span class="em">☕</span> 로비 및 탕비실</span>
@@ -880,7 +911,7 @@
     </section>
 
     <!-- B1 -->
-    <section class="floor" style="--fl:#f472b6; --fl-soft:rgba(244,114,182,.16); --fl-line:rgba(244,114,182,.35)">
+    <section class="floor" style="--fl:#f472b6; --fl-soft:rgba(244,114,182,.16); --fl-line:rgba(244,114,182,.35); --bg:url('assets/bg/floor-b1.webp'); --bg-sm:url('assets/bg/floor-b1-sm.webp')">
       <div class="floor-head">
         <span class="floor-num">B1</span>
         <span class="floor-name"><span class="em">🎉</span> 지하 복지층 — 휴게실 · 오락실 · 노래방</span>
@@ -1497,6 +1528,19 @@ window.__BLOG_POSTS = [{"id":"01","no":"①","file":"01-성경-히브리어-입�
     return s.replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}\u{200D}]/gu, "").trim();
   }
 
+  /* ---------------- 3D 캐릭터 이미지 (assets/chars) ---------------- */
+  var CHAR_ALIAS = { pop: "ppop", welfare: "bokji", owner: "ceo" };
+  function charSrc(id) { var k = CHAR_ALIAS[id] || id; return "assets/chars/" + k + ".webp"; }
+  function figHtml(id, emoji) {
+    return '<span class="fig-wrap" aria-hidden="true">' +
+      '<img class="fig" src="' + charSrc(id) + '" alt="" loading="lazy" decoding="async" ' +
+        'onerror="this.closest(\'.fig-wrap\').classList.add(\'imgfail\')">' +
+      '<span class="fig-fb">' + (emoji || "") + '</span></span>';
+  }
+  function faceHtml(id) {
+    return '<img class="gl-face" src="' + charSrc(id) + '" alt="" loading="lazy" decoding="async">';
+  }
+
   /* ---------------- staff rendering ---------------- */
   function teamOf(team) { return staff.filter(function (s) { return s.team === team; }); }
 
@@ -1512,7 +1556,7 @@ window.__BLOG_POSTS = [{"id":"01","no":"①","file":"01-성경-히브리어-입�
         '<div class="bubble' + (on ? "" : " soft") + '">' + esc(on ? s.workBubble : "자리 비움 · " + place + "에서 휴식 중") + '</div>' +
         (on
           ? '<div class="person">' +
-              '<div class="ava on" aria-hidden="true">' + s.emoji + '</div>' +
+              figHtml(s.id, s.emoji) +
               '<div class="tag">' + esc(s.name) + '</div>' +
             '</div>'
           : '<div class="person">' +
@@ -1538,7 +1582,7 @@ window.__BLOG_POSTS = [{"id":"01","no":"①","file":"01-성경-히브리어-입�
   function guestCard(s) {
     return '<div class="guest" data-report="' + s.id + '" role="button" tabindex="0" aria-label="' + esc(s.name) + ' 업무 진행 보고 열기">' +
       '<div class="bubble">' + esc(s.rest.bubble) + '</div>' +
-      '<div class="ava on" aria-hidden="true" style="width:44px;height:44px;font-size:23px">' + s.emoji + '</div>' +
+      figHtml(s.id, s.emoji) +
       '<div class="tag">' + esc(s.name) + '</div>' +
       '<button type="button" class="mini" data-toggle="' + s.id + '" aria-label="' + esc(s.name) + ' 복귀시키기">💻 복귀</button>' +
     '</div>';
@@ -1607,7 +1651,7 @@ window.__BLOG_POSTS = [{"id":"01","no":"①","file":"01-성경-히브리어-입�
     return '<button type="button" class="gl-row' + (s.working ? "" : " resting") + '" data-report="' + esc(s.id) + '" ' +
         'aria-label="' + esc(s.name + " 업무 진행 보고 열기 — " + (s.working ? "근무 중" : "휴식 중 · " + place)) + '">' +
       '<span class="gl-line">' +
-        '<span class="gl-e" aria-hidden="true">' + s.emoji + '</span>' +
+        '<span class="gl-e" aria-hidden="true">' + faceHtml(s.id) + '</span>' +
         '<span class="gl-n">' + esc(s.name) + '</span>' +
         '<span class="gl-fl ' + esc(s.team) + '">' + esc(fi.num) + '</span>' +
         '<span class="gl-pill ' + (s.working ? "work" : "rest") + '"><span class="dot"></span>' +
@@ -1975,7 +2019,10 @@ window.__BLOG_POSTS = [{"id":"01","no":"①","file":"01-성경-히브리어-입�
     drawerEl.classList.add("wide");
     drawerBody.innerHTML =
       '<div class="dr-head">' +
-        '<div class="dr-ava" aria-hidden="true">✍️</div>' +
+        '<div class="dr-ava" aria-hidden="true">' +
+          '<span class="dr-fb">✍️</span>' +
+          '<img class="dr-face" src="' + charSrc("hebrew") + '" alt="" decoding="async" onerror="this.remove()">' +
+        '</div>' +
         '<div class="dr-id">' +
           '<div class="pr-top">' +
             '<button type="button" class="pr-back" data-blog-back>← 목록으로</button>' +
@@ -2103,7 +2150,10 @@ window.__BLOG_POSTS = [{"id":"01","no":"①","file":"01-성경-히브리어-입�
 
     drawerBody.innerHTML =
       '<div class="dr-head">' +
-        '<div class="dr-ava" aria-hidden="true">' + m.emoji + '</div>' +
+        '<div class="dr-ava" aria-hidden="true">' +
+          '<span class="dr-fb">' + m.emoji + '</span>' +
+          '<img class="dr-face" src="' + charSrc(openId) + '" alt="" decoding="async" onerror="this.remove()">' +
+        '</div>' +
         '<div class="dr-id">' +
           '<h2 id="repName">' + esc(m.name) + '</h2>' +
           '<div class="dr-role">' + esc(m.role) + ' · ' + esc(m.floorNum + " " + m.floorName) + '</div>' +
