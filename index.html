@@ -155,7 +155,7 @@
   /* ---------- floors ---------- */
   .floor{margin-top:16px; border:1px solid var(--line); border-radius:16px; overflow:hidden;
     background-color:#0a1220;
-    background-image:linear-gradient(180deg, rgba(3,8,18,.50), rgba(3,8,18,.88)), var(--bg, none);
+    background-image:linear-gradient(180deg, rgba(3,8,18,.40), rgba(3,8,18,.84)), var(--bg, none);
     background-size:cover, cover; background-position:center top, center top; background-repeat:no-repeat;
     box-shadow:0 16px 40px rgba(0,0,0,.34)}
   .floor-head{display:flex; align-items:center; gap:10px; padding:10px 12px; background-color:rgba(5,11,22,.74);
@@ -219,16 +219,17 @@
 
   /* ---------- 3D 치비 캐릭터 (assets/chars) ---------- */
   .fig-wrap{position:relative; display:inline-flex; align-items:flex-end; justify-content:center; line-height:0}
-  .fig{height:88px; width:auto; max-width:132px; display:block; object-fit:contain;
+  .fig{height:102px; width:auto; max-width:150px; display:block; object-fit:contain;
     filter:drop-shadow(0 9px 12px rgba(2,6,16,.6)); animation:figbob 6s ease-in-out infinite}
   @keyframes figbob{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
-  .fig.xl{height:108px; max-width:170px}
-  .fig.lg{height:98px; max-width:150px}
-  .guest .fig{height:64px; max-width:104px}
+  .fig.xl{height:124px; max-width:190px}
+  .fig.lg{height:112px; max-width:170px}
+  .guest .fig{height:76px; max-width:120px}
   .fig-fb{display:none; font-size:30px; line-height:1}
   .fig-wrap.imgfail .fig{display:none}
   .fig-wrap.imgfail .fig-fb{display:block}
-  .card.desk-card .desk{margin-top:-8px}
+  .card .scene > .desk{margin-top:-12px; position:relative; z-index:2}
+  .card .scene > .tag{margin-top:-10px; position:relative; z-index:3; box-shadow:0 5px 12px rgba(2,6,16,.45)}
   .gl-face{width:22px; height:22px; border-radius:7px; object-fit:cover; object-position:50% 4%;
     background:radial-gradient(circle at 35% 25%, #24344f, #0d1728); border:1px solid rgba(148,163,184,.32); display:block; flex:0 0 auto}
   .dr-ava{position:relative; overflow:hidden}
@@ -618,12 +619,12 @@
     .ava{width:42px; height:42px; font-size:23px; border-width:1.5px}
     .ava.xl{width:54px; height:54px; font-size:29px}
     .ava.empty{font-size:20px}
-    .fig{height:64px; max-width:100px}
-    .fig.xl{height:80px; max-width:124px}
-    .fig.lg{height:72px; max-width:112px}
-    .guest .fig{height:50px; max-width:80px}
+    .fig{height:76px; max-width:116px}
+    .fig.xl{height:92px; max-width:140px}
+    .fig.lg{height:84px; max-width:128px}
+    .guest .fig{height:58px; max-width:92px}
     .gl-face{width:19px; height:19px; border-radius:6px}
-    .card.desk-card .desk{margin-top:-6px}
+    .card .scene > .desk{margin-top:-8px}
     .floor{background-image:linear-gradient(180deg, rgba(3,8,18,.44), rgba(3,8,18,.88)), var(--bg-sm, var(--bg, none))}
     .tag{font-size:9.2px; padding:1px 6px}
     .laptop{width:40px; height:26px}
@@ -806,12 +807,12 @@
               <div class="bubble">전체 보고 받는 중!</div>
               <div class="person">
                 <span class="fig-wrap" aria-hidden="true"><img class="fig xl" src="assets/chars/ceo.webp" alt="" decoding="async" onerror="this.closest('.fig-wrap').classList.add('imgfail')"><span class="fig-fb">👑</span></span>
-                <div class="tag gold">👑 삼촌 · 대표</div>
               </div>
               <div class="desk">
                 <div class="laptop lit"><span class="scr"></span><span class="base"></span></div>
                 <div class="plank"></div>
               </div>
+              <div class="tag gold">👑 삼촌 · 대표</div>
             </div>
             <div class="role"><span class="rl">최종 승인 권한 · 빨간불 건은 대표님 결재 없이는 실행되지 않습니다</span><span class="peek" aria-hidden="true">보고 ›</span></div>
             <div class="led"><span class="led-tag">▮ WORK</span><div class="led-track"><span class="led-static">최종 승인 대기 · 보고 라인 : 2F·3F·4F 팀 → 💼 비서 → 👑 삼촌(대표) · 모든 실행은 승인 후</span></div></div>
@@ -826,12 +827,12 @@
               <div class="bubble">모든 상황 실시간 브리핑 중!</div>
               <div class="person">
                 <span class="fig-wrap" aria-hidden="true"><img class="fig lg" src="assets/chars/secretary.webp" alt="" decoding="async" onerror="this.closest('.fig-wrap').classList.add('imgfail')"><span class="fig-fb">💼</span></span>
-                <div class="tag">💼 비서</div>
               </div>
               <div class="desk">
                 <div class="laptop lit"><span class="scr"></span><span class="base"></span></div>
                 <div class="plank"></div>
               </div>
+              <div class="tag">💼 비서</div>
             </div>
             <div class="role" title="2F·3F 현황 취합 · 미결 승인 정리"><span class="rl">2F·3F 현황 취합 · 미결 승인 정리</span><span class="peek" aria-hidden="true">보고 ›</span></div>
             <div class="sec-stats">
@@ -1555,18 +1556,15 @@ window.__BLOG_POSTS = [{"id":"01","no":"①","file":"01-성경-히브리어-입�
       '<div class="scene">' +
         '<div class="bubble' + (on ? "" : " soft") + '">' + esc(on ? s.workBubble : "자리 비움 · " + place + "에서 휴식 중") + '</div>' +
         (on
-          ? '<div class="person">' +
-              figHtml(s.id, s.emoji) +
-              '<div class="tag">' + esc(s.name) + '</div>' +
-            '</div>'
-          : '<div class="person">' +
-              '<div class="ava empty" aria-hidden="true">🪑</div>' +
-              '<div class="tag dim">' + esc(s.name) + ' · 자리 비움</div>' +
-            '</div>') +
+          ? '<div class="person">' + figHtml(s.id, s.emoji) + '</div>'
+          : '<div class="person"><div class="ava empty" aria-hidden="true">🪑</div></div>') +
         '<div class="desk' + (on ? "" : " off") + '">' +
           '<div class="laptop' + (on ? " lit" : "") + '"><span class="scr"></span><span class="base"></span></div>' +
           '<div class="plank"></div>' +
         '</div>' +
+        (on
+          ? '<div class="tag">' + esc(s.name) + '</div>'
+          : '<div class="tag dim">' + esc(s.name) + ' · 자리 비움</div>') +
         (on ? "" : '<button type="button" class="vacant-note" data-goto="' + s.rest.spot + '" aria-label="' + esc(place) + ' 위치 보기">↘ ' + esc(place) + '에서 보기</button>') +
       '</div>' +
       '<div class="role"><span class="rl">' + esc(s.role) + '</span><span class="peek" aria-hidden="true">보고 ›</span></div>' +
